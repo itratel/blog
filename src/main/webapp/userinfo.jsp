@@ -77,19 +77,13 @@
     <div class="main-nav">
         <ul>
             <a href="<%=context %>/index.jsp">
+                <li>返回主页</li>
+            </a>
+            <a href="#">
                 <li>博客首页</li>
             </a>
-            <a href="<%=context %>/list.jsp">
-                <li>博客列表</li>
-            </a>
-            <a href="<%=context %>/userinfo.jsp">
-                <li>个人档案</li>
-            </a>
-            <a href="<%=context %>/message.jsp">
-                <li>留言</li>
-            </a>
             <a href="<%=context %>/servlet/PostlistServlet?role=1">
-                <li>后台登陆</li>
+                <li>控制台</li>
             </a>
         </ul>
     </div>

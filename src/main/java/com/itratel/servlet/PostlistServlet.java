@@ -1,17 +1,14 @@
 package com.itratel.servlet;
 
 import com.itratel.model.Article;
-import com.itratel.model.MainCategory;
-import com.itratel.model.Pager;
+import com.itratel.model.PageInfo;
 import com.itratel.service.ArticleService;
-import com.itratel.service.CategoryService;
 
+import javax.servlet.http.HttpServlet;
 import java.io.IOException;
-import java.util.List;
 
-public class PostlistServlet extends javax.servlet.http.HttpServlet {
+public class PostlistServlet extends HttpServlet {
     ArticleService articleService = new ArticleService();
-    CategoryService categoryService = new CategoryService();
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         doGet(request, response);
@@ -52,11 +49,9 @@ public class PostlistServlet extends javax.servlet.http.HttpServlet {
             pageSize = Integer.parseInt(request.getParameter("pageSize"));  // 每页显示多少条记录
         }
         //调用service 获取查询结果
-        Pager<Article> result = articleService.findArticle(searchModel, pageNum, pageSize);
-        List<MainCategory> mainCategory = categoryService.getMaincategory();
+        PageInfo<Article> result = articleService.findArticle(searchModel, pageNum, pageSize);
         // 返回结果到页面
         request.setAttribute("result", result);
-        request.setAttribute("mainCategory", mainCategory);
         switch (role) {
             case "0":
                 request.getRequestDispatcher(request.getContextPath() + "/index.jsp").forward(request, response);

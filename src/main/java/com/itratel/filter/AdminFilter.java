@@ -36,7 +36,7 @@ public class AdminFilter implements Filter {
         if (session.getAttribute("username") != null) {
             chain.doFilter(request, response);   //允许放行
         } else {
-            res.sendRedirect(req.getContextPath() + "../login.html");
+            res.sendRedirect(req.getContextPath() + "../login.jsp");
         }
     }
 

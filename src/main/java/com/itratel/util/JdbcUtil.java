@@ -76,6 +76,7 @@ public class JdbcUtil {
             throws SQLException {
         boolean flag;
         int result;// 表示当用户执行添加删除和修改的时候所影响数据库的行数
+        connection = getConnection();
         pstmt = connection.prepareStatement(sql);
         int index = 1;
         // 填充sql语句中的占位符
@@ -101,6 +102,7 @@ public class JdbcUtil {
             throws SQLException {
         List<Map<String, Object>> list = new ArrayList<>();
         int index = 1;
+        connection = getConnection();
         pstmt = connection.prepareStatement(sql);
         if (params != null && !params.isEmpty()) {
             for (Object param : params) {
@@ -115,11 +117,11 @@ public class JdbcUtil {
             for (int i = 0; i < cols_len; i++) {
                 String cols_name = metaData.getColumnName(i + 1);
                 System.out.println("cols_name = " + cols_name);
-//                Object cols_value = resultSet.getObject(cols_name);
-//                if (cols_value == null) {
-//                    cols_value = "";
-//                }
-//                map.put(cols_name, cols_value);
+                Object cols_value = resultSet.getObject(cols_name);
+                if (cols_value == null) {
+                    cols_value = "";
+                }
+                map.put(cols_name, cols_value);
             }
             list.add(map);
         }

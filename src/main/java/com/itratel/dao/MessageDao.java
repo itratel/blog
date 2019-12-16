@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ArticleDao {
+public class MessageDao {
     /**
      * 根据查询条件，查询文章分页信息
      *

@@ -22,10 +22,8 @@
                     <input type="text" id="VerifyCode" class="form-control" placeholder="验证码" name="VerifyCode"
                            required>
                     <img onclick="reloadCode()" src="/servlet/ImgServlet" id="img"/>
-
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">登录</button>
-                <a href="/Blog/index.jsp">返回博客</a>
             </form>
             <script>
                 function reloadCode() {

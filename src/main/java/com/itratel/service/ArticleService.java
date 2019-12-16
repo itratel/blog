@@ -2,7 +2,7 @@ package com.itratel.service;
 
 import com.itratel.dao.ArticleDao;
 import com.itratel.model.Article;
-import com.itratel.model.Pager;
+import com.itratel.model.PageInfo;
 
 public class ArticleService {
     private ArticleDao articleDao;
@@ -12,7 +12,7 @@ public class ArticleService {
     /**
      * 根据查询条件，查询文章分页信息
      */
-    public Pager<Article> findArticle(Article searchModel, int pageNum,int pageSize) {
+    public PageInfo<Article> findArticle(Article searchModel, int pageNum, int pageSize) {
         return articleDao.findArticle(searchModel, pageNum,pageSize);
     }
     /**
