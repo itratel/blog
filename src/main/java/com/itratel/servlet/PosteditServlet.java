@@ -30,22 +30,14 @@ public class PosteditServlet extends HttpServlet {
         else {
             article = new Article();
             article.setTitle(request.getParameter("title"));
-            article.setMd_content(request.getParameter("test-editormd-markdown-doc"));
-            article.setHtml_content(request.getParameter("text"));
-            int top = request.getParameter("top") == null ? 0 : 1;
-            article.setTop(top);
+            article.setMdContent(request.getParameter("test-editormd-markdown-doc"));
+            article.setHtmlContent(request.getParameter("text"));
             String year = request.getParameter("year");
             String month = request.getParameter("month");
             String day = request.getParameter("day");
             String hour = request.getParameter("hour");
             String minute = request.getParameter("minute");
-            String createdate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-            article.setCreatedate(createdate);
-            article.setSubtitle(request.getParameter("subtitle"));
-            article.setMain_id(Integer.parseInt(request.getParameter("main_id")));
-            if(request.getParameter("sub_id")!=null) {
-                article.setSub_id(Integer.parseInt(request.getParameter("sub_id")));
-            }
+            String date = year + "-" + month + "-" + day + " " + hour + ":" + minute;
             if(request.getParameter("id")!=null) {
                 id = Integer.parseInt(request.getParameter("id"));
             }

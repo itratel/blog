@@ -78,7 +78,7 @@
                         <div class="single-title"><h2>${article.title }</h2></div>
                         <div class="single-info">
                             发表于${fn:substring(article.createdate,0,10)}&nbsp;|&nbsp;分类于${article.sname }</div>
-                        <div class="single-content">${article.html_content }</div>
+                        <div class="single-content">${article.htmlContent }</div>
                         <br>
                             <%--畅言--%>
                         <!--PC和WAP自适应版-->

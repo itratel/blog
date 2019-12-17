@@ -23,8 +23,6 @@ public class ArticleDao {
         // 存放查询参数
         List<Object> paramList = new ArrayList<>();
         int id = searchModel.getId();
-        int sub_id = searchModel.getSub_id();
-        int main_id = searchModel.getMain_id();
         StringBuilder sql = new StringBuilder("select a.*, m.name as mname, s.name as sname from " +
                 "article a left join maincategory m on a.main_id=m.id left join subcategory s on a.sub_id = s.id where 1=1 ");
         StringBuilder countSql = new StringBuilder("select count(id) as totalRecord from article where 1=1 ");
@@ -32,16 +30,6 @@ public class ArticleDao {
             sql.append(" and a.id = ?");
             countSql.append(" and id = ?");
             paramList.add(id);
-        }
-        if (sub_id != 0) {
-            sql.append(" and a.sub_id = ? ");
-            countSql.append(" and sub_id = ? ");
-            paramList.add(sub_id);
-        }
-        if (main_id != 0) {
-            sql.append(" and a.main_id= ? ");
-            countSql.append(" and main_id = ? ");
-            paramList.add(main_id);
         }
         sql.append(" ORDER BY top desc,createdate desc ");
         countSql.append(" ORDER BY top desc,createdate desc ");
@@ -93,14 +81,8 @@ public class ArticleDao {
      */
     public boolean addArticle(Article article) {
         boolean result = false;
-        StringBuilder sql;
-        if (article.getSub_id() != 0) {
-            sql = new StringBuilder("insert into article(title,subtitle,md_content,html_content," +
-                    "createdate,sub_id,main_id,top) values(?,?,?,?,?,?,?,?);");
-        } else {
-            sql = new StringBuilder("insert into article(title,subtitle,md_content,html_content," +
+        StringBuilder sql = new StringBuilder("insert into article(title,subtitle,md_content,html_content," +
                     "createdate,main_id,top) values(?,?,?,?,?,?,?);");
-        }
         JdbcUtil jdbcUtil;
         try {
             jdbcUtil = new JdbcUtil();
@@ -121,14 +103,8 @@ public class ArticleDao {
      */
     public boolean updateArticle(Article article, int id) {
         boolean result = false;
-        StringBuilder sql;
-        if (article.getSub_id() != 0) {
-            sql = new StringBuilder("update article set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
-                    "createdate = ?,sub_id = ?,main_id = ?,top = ?  where id = ? ");
-        } else {
-            sql = new StringBuilder("update article set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
+        StringBuilder sql = new StringBuilder("update article set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
                     "createdate = ?,main_id = ?,top = ?  where id = ? ");
-        }
         JdbcUtil jdbcUtil;
         ArrayList paramList = (ArrayList) article.toList();
         paramList.add(id);

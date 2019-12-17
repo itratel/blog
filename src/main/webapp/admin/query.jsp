@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -21,26 +21,6 @@
         String context = request.getContextPath();
     %>
     <script>
-        function getSubCatagory() {
-            var main_id = $("#main_id").val();
-            $.ajax({
-                dataType: "json",    //数据类型为json格式
-                type: "GET",
-                url: "<%=context %>/servlet/CategoryServlet?action=ajaxsub",
-                data: {"main_id": main_id},
-                success: function (data, textStatus) {
-                    var sub_id = $("#sub_id");
-                    sub_id.empty();
-                    sub_id.append('<option value="0">二级分类</option>');
-                    $.each(data, function (key, val) {
-                        sub_id.append('<option value="' + key + '">' + val + '</option>');
-                    })
-                },
-                error: function (xhr, status, errMsg) {
-                    alert("获取分类失败");
-                }
-            })
-        }
 
         function deletePost(id) {
             if (confirm("确定删除文章？")) {
@@ -105,19 +85,10 @@
                     <a href="#">
                         <li class="current">所有文章</li>
                     </a>
-                    <a href="<%=context %>/admin/addpost.jsp">
+                    <a href="<%=context %>/admin/add.jsp">
                         <li>写文章</li>
                     </a>
-                    <a href="<%=context %>/servlet/CategoryServlet?action=getall">
-                        <li>分类</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>评论</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>留言</li>
-                    </a>
-                    <a href="<%=context %>/index.html">
+                    <a href="<%=context %>/index.jsp">
                         <li>返回首页</li>
                     </a>
                 </ul>
@@ -135,20 +106,18 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>序号</th>
                         <th>标题</th>
-                        <th>主分类</th>
-                        <th>二级分类</th>
-                        <th>日期</th>
+                        <th>发表日期</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${result.dataList }" var="article">
+                    <c:forEach items="${result.dataList }" var="article" varStatus="status">
                     <tr>
+                        <td>${status.index + 1}</td>
                         <td><c:out value="${article.title }"></c:out></td>
-                        <td><c:out value="${article.mname }"></c:out></td>
-                        <td><c:out value="${article.sname }"></c:out></td>
-                        <td><c:out value="${article.createdate }"></c:out></td>
+                        <td><c:out value="${article.date }"></c:out></td>
                         <td>
                             <a href="<%=context %>/servlet/PostlistServlet?role=3&id=${article.id }">
                                 <button type="button" class="btn btn-primary">修改</button>
@@ -162,21 +131,6 @@
                 <br>
                 <div id="News-Pagination" style="float: right"></div>
             </c:if>
-            <div class="fiter col-md-4">
-                <form class="form-horizontal form-inline" action="<%=context %>/servlet/PostlistServlet?role=1"
-                      method="post" id="postForm">
-                    <select class="form-control" name="main_id" id="main_id" onchange="getSubCatagory()">
-                        <option value="0">一级分类</option>
-                        <c:forEach items="${mainCategory}" var="category">
-                            <option value="${category.id }">${category.name }</option>
-                        </c:forEach>
-                    </select>
-                    <select class="form-control" name="sub_id" id="sub_id">
-                        <option value="0">二级分类</option>
-                    </select>
-                    <button type="submit" class="btn btn-success">过滤</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>

@@ -5,48 +5,45 @@ import java.util.List;
 import java.util.Map;
 
 public class Article {
+    /***
+     * 主键
+     */
     private int id;
+    /***
+     * 标题
+     */
     private String title;
-    private String subtitle;
-    private String md_content;
-    private String html_content;
-    private String createdate;
-    private int sub_id = 0;
-    private int main_id;
-    private String mname;
-    private String sname;
-    private int top;
+    /***
+     * md内容
+     */
+    private String mdContent;
+    /***
+     * html内容
+     */
+    private String htmlContent;
+    /***
+     * 日期
+     */
+    private String date;
 
     public Article() {
     }
 
-    public Article(int id, String title, String subtitle, String md_content, String html_content, String createdate, int sub_id, int main_id, String mname, String sname, int top) {
+    public Article(int id, String title, String mdContent, String htmlContent, String date) {
         this.id = id;
         this.title = title;
-        this.subtitle = subtitle;
-        this.md_content = md_content;
-        this.html_content = html_content;
-        this.createdate = createdate;
-        this.sub_id = sub_id;
-        this.main_id = main_id;
-        this.mname = mname;
-        this.sname = sname;
-        this.top = top;
+        this.mdContent = mdContent;
+        this.htmlContent = htmlContent;
+        this.date = date;
     }
 
     public Article(Map<String, Object> map) {
         this.id = (int) map.get("id");
         this.title = (String) map.get("title");
-        this.subtitle = (String) map.get("subtitle");
-        this.md_content = (String) map.get("md_content");
-        this.html_content = (String) map.get("html_content");
-        this.createdate = (String) map.get("createdate");
-//        if (map.get("sub_id")!=null)
-//            this.sub_id = (int) map.get("sub_id");
-        this.main_id = (int) map.get("main_id");
-        this.mname = (String) map.get("mname");
-        this.sname = (String) map.get("sname");
-        this.top = (int) map.get("top");
+        this.mdContent = (String) map.get("mdContent");
+        this.htmlContent = (String) map.get("htmlContent");
+        this.date = (String) map.get("date");
+
     }
 
     public int getId() {
@@ -65,107 +62,36 @@ public class Article {
         this.title = title;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public String getMdContent() {
+        return mdContent;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public void setMdContent(String mdContent) {
+        this.mdContent = mdContent;
     }
 
-    public String getMd_content() {
-        return md_content;
+    public String getHtmlContent() {
+        return htmlContent;
     }
 
-    public void setMd_content(String md_content) {
-        this.md_content = md_content;
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
     }
 
-    public String getHtml_content() {
-        return html_content;
+    public String getDate() {
+        return date;
     }
 
-    public void setHtml_content(String html_content) {
-        this.html_content = html_content;
-    }
-
-    public String getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate;
-    }
-
-    public int getSub_id() {
-        return sub_id;
-    }
-
-    public void setSub_id(int sub_id) {
-        this.sub_id = sub_id;
-    }
-
-    public int getMain_id() {
-        return main_id;
-    }
-
-    public void setMain_id(int main_id) {
-        this.main_id = main_id;
-    }
-
-    public int getTop() {
-        return top;
-    }
-
-    public void setTop(int top) {
-        this.top = top;
-    }
-
-    public String getMname() {
-        return mname;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
-    }
-
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", md_content='" + md_content + '\'' +
-                ", html_content='" + html_content + '\'' +
-                ", createdate=" + createdate +
-                ", sub_id=" + sub_id +
-                ", main_id=" + main_id +
-                ", mname='" + mname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", top=" + top +
-                '}';
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public List toList() {
-        List list = new ArrayList();
+        List<String> list = new ArrayList<>();
         list.add(title);
-        list.add(subtitle);
-        list.add(md_content);
-        list.add(html_content);
-        list.add(createdate);
-        if (sub_id != 0) {
-            list.add(sub_id);
-        }
-        list.add(main_id);
-        list.add(top);
+        list.add(mdContent);
+        list.add(htmlContent);
+        list.add(date);
         return list;
     }
 }

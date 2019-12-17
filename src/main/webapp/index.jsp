@@ -118,7 +118,7 @@
                                     </h2>
                                     <div class="post-detial">
                                         <span>${article.sname}</span>
-                                        <span>${fn:substring(article.createdate,0,10)}</span>
+                                        <span>${fn:substring(article.date,0,10)}</span>
                                     </div>
                                 </div>
                                 <p>${article.subtitle }</p>

@@ -105,7 +105,7 @@
                     <a href="#">
                         <li class="current">所有文章</li>
                     </a>
-                    <a href="<%=context %>/admin/addpost.jsp">
+                    <a href="<%=context %>/admin/add.jsp">
                         <li>写文章</li>
                     </a>
                     <a href="<%=context %>/servlet/CategoryServlet?action=getall">
@@ -153,8 +153,6 @@
                             <a href="<%=context %>/servlet/PostlistServlet?role=3&id=${article.id }">
                                 <button type="button" class="btn btn-primary">修改</button>
                             </a>
-                            <button type="button" class="btn btn-danger" onclick="deletePost(${article.id })">删除
-                            </button>
                         </td>
                     </tr>
                     </c:forEach>

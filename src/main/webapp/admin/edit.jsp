@@ -105,19 +105,10 @@
                     <a href="<%=context %>/servlet/PostlistServlet?role=1">
                         <li>所有文章</li>
                     </a>
-                    <a href="<%=context %>/admin/addpost.jsp">
+                    <a href="<%=context %>/admin/add.jsp">
                         <li class="current">写文章</li>
                     </a>
-                    <a href="<%=context %>/servlet/CategoryServlet?action=getall">
-                        <li>分类</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>评论</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>留言</li>
-                    </a>
-                    <a href="<%=context %>/index.html">
+                    <a href="<%=context %>/index.jsp">
                         <li>返回首页</li>
                     </a>
                 </ul>
@@ -132,7 +123,7 @@
                 <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题"
                        required="" autofocus="" autocomplete="off" style="width:100%;" value="${article.title }">
                 <div class="editormd" id="test-editormd">
-                    <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc">${article.md_content }</textarea>
+                    <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc">${article.mdContent }</textarea>
                     <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
                     <textarea class="editormd-html-textarea" name="text"></textarea>
                 </div>

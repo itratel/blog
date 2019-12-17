@@ -1,7 +1,9 @@
 package com.itratel.model;
 
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Message {
     /***
@@ -9,17 +11,13 @@ public class Message {
      */
     private int id;
     /***
-     * 标题
-     */
-    private int title;
-    /***
      * 具体内容
      */
-    private int content;
+    private String content;
     /***
      * 日期
      */
-    private Date date;
+    private String date;
 
     public int getId() {
         return id;
@@ -29,27 +27,41 @@ public class Message {
         this.id = id;
     }
 
-    public int getTitle() {
-        return title;
-    }
-
-    public void setTitle(int title) {
-        this.title = title;
-    }
-
-    public int getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(int content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+
+    public Message(Map<String, Object> map) {
+
+    }
+
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
+    public List toList() {
+        List<String> list = new ArrayList<>();
+        list.add(content);
+        list.add(date);
+        return list;
     }
 }

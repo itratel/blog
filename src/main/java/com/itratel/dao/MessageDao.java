@@ -1,6 +1,6 @@
 package com.itratel.dao;
 
-import com.itratel.model.Article;
+import com.itratel.model.Message;
 import com.itratel.model.PageInfo;
 import com.itratel.util.JdbcUtil;
 
@@ -18,30 +18,18 @@ public class MessageDao {
      * @param pageSize    每页显示多少条记录
      * @return 查询结果
      */
-    public PageInfo<Article> findArticle(Article searchModel, int pageNum, int pageSize) {
-        PageInfo<Article> result;
+    public PageInfo<Message> findMessage(Message searchModel, int pageNum, int pageSize) {
+        PageInfo<Message> result;
         // 存放查询参数
         List<Object> paramList = new ArrayList<>();
         int id = searchModel.getId();
-        int sub_id = searchModel.getSub_id();
-        int main_id = searchModel.getMain_id();
         StringBuilder sql = new StringBuilder("select a.*, m.name as mname, s.name as sname from " +
-                "article a left join maincategory m on a.main_id=m.id left join subcategory s on a.sub_id = s.id where 1=1 ");
-        StringBuilder countSql = new StringBuilder("select count(id) as totalRecord from article where 1=1 ");
+                "message a left join maincategory m on a.main_id=m.id left join subcategory s on a.sub_id = s.id where 1=1 ");
+        StringBuilder countSql = new StringBuilder("select count(id) as totalRecord from message where 1=1 ");
         if (id != 0) {
             sql.append(" and a.id = ?");
             countSql.append(" and id = ?");
             paramList.add(id);
-        }
-        if (sub_id != 0) {
-            sql.append(" and a.sub_id = ? ");
-            countSql.append(" and sub_id = ? ");
-            paramList.add(sub_id);
-        }
-        if (main_id != 0) {
-            sql.append(" and a.main_id= ? ");
-            countSql.append(" and main_id = ? ");
-            paramList.add(main_id);
         }
         sql.append(" ORDER BY top desc,createdate desc ");
         countSql.append(" ORDER BY top desc,createdate desc ");
@@ -50,7 +38,7 @@ public class MessageDao {
         // 使用limit关键字，实现分页
         sql.append(" limit " + fromIndex + ", " + pageSize);
         // 存放所有查询出的文章对象
-        List<Article> studentList = new ArrayList<>();
+        List<Message> studentList = new ArrayList<>();
         JdbcUtil jdbcUtil = null;
         try {
             jdbcUtil = new JdbcUtil();
@@ -63,7 +51,7 @@ public class MessageDao {
             List<Map<String, Object>> studentResult = jdbcUtil.findResult(sql.toString(), paramList);
             if (studentResult != null) {
                 for (Map<String, Object> map : studentResult) {
-                    Article s = new Article(map);
+                    Message s = new Message(map);
                     studentList.add(s);
                 }
             }
@@ -88,24 +76,18 @@ public class MessageDao {
     /**
      * 添加新文章
      *
-     * @param article 文章对象
+     * @param message 文章对象
      * @return 插入结果
      */
-    public boolean addArticle(Article article) {
+    public boolean addMessage(Message message) {
         boolean result = false;
-        StringBuilder sql;
-        if (article.getSub_id() != 0) {
-            sql = new StringBuilder("insert into article(title,subtitle,md_content,html_content," +
-                    "createdate,sub_id,main_id,top) values(?,?,?,?,?,?,?,?);");
-        } else {
-            sql = new StringBuilder("insert into article(title,subtitle,md_content,html_content," +
+        StringBuilder sql = new StringBuilder("insert into message(title,subtitle,md_content,html_content," +
                     "createdate,main_id,top) values(?,?,?,?,?,?,?);");
-        }
         JdbcUtil jdbcUtil;
         try {
             jdbcUtil = new JdbcUtil();
             jdbcUtil.getConnection(); // 获取数据库连接
-            result = jdbcUtil.updateByPreparedStatement(sql.toString(), article.toList());
+            result = jdbcUtil.updateByPreparedStatement(sql.toString(), message.toList());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,22 +97,17 @@ public class MessageDao {
     /**
      * 修改文章
      *
-     * @param article 文章对象
-     * @param article 文章
+     * @param message 文章对象
+     * @param message 文章
      * @return 更新结果
      */
-    public boolean updateArticle(Article article, int id) {
+    public boolean updateMessage(Message message, int id) {
         boolean result = false;
-        StringBuilder sql;
-        if (article.getSub_id() != 0) {
-            sql = new StringBuilder("update article set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
+        StringBuilder sql = new StringBuilder("update message set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
                     "createdate = ?,sub_id = ?,main_id = ?,top = ?  where id = ? ");
-        } else {
-            sql = new StringBuilder("update article set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
-                    "createdate = ?,main_id = ?,top = ?  where id = ? ");
-        }
+
         JdbcUtil jdbcUtil;
-        ArrayList paramList = (ArrayList) article.toList();
+        ArrayList paramList = (ArrayList) message.toList();
         paramList.add(id);
         try {
             jdbcUtil = new JdbcUtil();
@@ -148,10 +125,10 @@ public class MessageDao {
      * @param id 文章id
      * @return 删除结果
      */
-    public boolean deleteArticle(int id) {
+    public boolean deleteMessage(int id) {
         boolean result = false;
         StringBuilder sql =
-                new StringBuilder("delete from article where id = ?;");
+                new StringBuilder("delete from message where id = ?;");
         JdbcUtil jdbcUtil;
         List<Object> paramList = new ArrayList<>();
         paramList.add(id);
