@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>留言实体</p>
+ * @author yinhao
+ * @date 2019/12/18 00:55
+ */
 public class Message {
     /***
      * 主键

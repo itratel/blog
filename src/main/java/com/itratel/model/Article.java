@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>文章实体</p>
+ * @author yinhao
+ * @date 2019/12/18 00:55
+ */
 public class Article {
     /***
      * 主键
@@ -94,4 +99,9 @@ public class Article {
         list.add(date);
         return list;
     }
+
+    public static Object[] getParams(Article article) {
+        return new Object[]{article.getTitle(), article.getMdContent(), article.getHtmlContent(), article.getDate()};
+    }
+
 }

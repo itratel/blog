@@ -5,30 +5,35 @@ import java.sql.*;
 import java.util.*;
 
 public class JdbcUtil {
-    // 表示定义数据库的用户名
+
+    /***
+     * 数据库的用户名
+     */
     private static String USERNAME;
-    // 定义数据库的密码
+    /***
+     * 数据库的密码
+     */
     private static String PASSWORD;
-    // 定义数据库的驱动信息
+    /***
+     * 定义数据库的驱动信息
+     */
     private static String DRIVER;
-    // 定义访问数据库的地址
+    /**
+     * 数据库的地址
+     */
     private static String URL;
 
     static {
-        //加载数据库配置信息，并给相关的属性赋值
-        loadConfig();
+        try {
+            //加载数据库配置信息，并给相关的属性赋值
+            loadConfig();
+            // 注册驱动
+            Class.forName(DRIVER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    // 定义数据库的链接
-    private Connection connection;
-    // 定义sql语句的执行对象
-    private PreparedStatement pstmt;
-    // 定义查询返回的结果集合
-    private ResultSet resultSet;
-
-    public JdbcUtil() {
-
-    }
 
     /**
      * 加载数据库配置信息，并给相关的属性赋值
@@ -52,122 +57,15 @@ public class JdbcUtil {
      *
      * @return 数据库连接
      */
-    public Connection getConnection() {
+    public static Connection getConnection() {
+        //数据库的链接
+        Connection connection;
         try {
-            // 注册驱动
-            Class.forName(DRIVER);
             // 获取连接
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (Exception e) {
             throw new RuntimeException("get connection error!", e);
         }
         return connection;
-    }
-
-    /**
-     * 执行更新操作
-     *
-     * @param sql    sql语句
-     * @param params 执行参数
-     * @return 执行结果
-     * @throws SQLException
-     */
-    public boolean updateByPreparedStatement(String sql, List<?> params)
-            throws SQLException {
-        boolean flag;
-        int result;// 表示当用户执行添加删除和修改的时候所影响数据库的行数
-        connection = getConnection();
-        pstmt = connection.prepareStatement(sql);
-        int index = 1;
-        // 填充sql语句中的占位符
-        if (params != null && !params.isEmpty()) {
-            for (Object param : params) {
-                pstmt.setObject(index++, param);
-            }
-        }
-        result = pstmt.executeUpdate();
-        flag = result > 0;
-        return flag;
-    }
-
-    /**
-     * 执行查询操作
-     *
-     * @param sql    sql语句
-     * @param params 执行参数
-     * @return
-     * @throws SQLException
-     */
-    public List<Map<String, Object>> findResult(String sql, List<?> params)
-            throws SQLException {
-        List<Map<String, Object>> list = new ArrayList<>();
-        int index = 1;
-        connection = getConnection();
-        pstmt = connection.prepareStatement(sql);
-        if (params != null && !params.isEmpty()) {
-            for (Object param : params) {
-                pstmt.setObject(index++, param);
-            }
-        }
-        resultSet = pstmt.executeQuery();
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        int cols_len = metaData.getColumnCount();
-        while (resultSet.next()) {
-            Map<String, Object> map = new HashMap<>();
-            for (int i = 0; i < cols_len; i++) {
-                String cols_name = metaData.getColumnName(i + 1);
-                System.out.println("cols_name = " + cols_name);
-                Object cols_value = resultSet.getObject(cols_name);
-                if (cols_value == null) {
-                    cols_value = "";
-                }
-                map.put(cols_name, cols_value);
-            }
-            list.add(map);
-        }
-        return list;
-    }
-
-    /**
-     * 释放资源
-     */
-    public void releaseConn() {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (pstmt != null) {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        JdbcUtil jdbcUtil = new JdbcUtil();
-        jdbcUtil.getConnection();
-        try {
-            List<Map<String, Object>> result = jdbcUtil.findResult(
-                    "select * from article", null);
-            for (Map<String, Object> m : result) {
-                System.out.println(m);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.releaseConn();
-        }
     }
 }

@@ -1,6 +1,10 @@
 package com.itratel.model;
 
-
+/**
+ * <p>用户实体</p>
+ * @author yinhao
+ * @date 2019/12/18 00:55
+ */
 public class User {
     /***
      * 主键

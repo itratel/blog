@@ -20,11 +20,11 @@ public class PageInfo<T> {
     /***
      * 一共多少条记录
      */
-    private int total;
+    private long total;
     /***
      * 总页数
      */
-    private int totalPage;
+    private long totalPage;
     /***
      * 要显示的数据
      */
@@ -33,7 +33,7 @@ public class PageInfo<T> {
     public PageInfo() {
     }
 
-    public PageInfo(int pageSize, int curPage, int total, int totalPage, List<T> dataList) {
+    public PageInfo(int pageSize, int curPage, long total, long totalPage, List<T> dataList) {
         this.pageSize = pageSize;
         this.curPage = curPage;
         this.total = total;
@@ -57,19 +57,19 @@ public class PageInfo<T> {
         this.curPage = curPage;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 
-    public int getTotalPage() {
+    public long getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(long totalPage) {
         this.totalPage = totalPage;
     }
 

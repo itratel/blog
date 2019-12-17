@@ -2,14 +2,15 @@ package com.itratel.servlet;
 
 import com.itratel.model.Article;
 import com.itratel.model.PageInfo;
-import com.itratel.service.ArticleService;
+import com.itratel.service.IArticleService;
+import com.itratel.service.impl.ArticleServiceImpl;
 
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
 public class PostlistServlet extends HttpServlet {
 
-    ArticleService articleService = new ArticleService();
+    IArticleService articleService = new ArticleServiceImpl();
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -39,7 +40,7 @@ public class PostlistServlet extends HttpServlet {
             pageSize = Integer.parseInt(request.getParameter("pageSize"));
         }
         //调用service 获取查询结果
-        PageInfo<Article> result = articleService.findArticle(searchModel, pageNum, pageSize);
+        PageInfo<Article> result = articleService.findArticle(pageNum, pageSize);
         // 返回结果到页面
         request.setAttribute("result", result);
         switch (role) {

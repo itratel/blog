@@ -2,14 +2,14 @@ package com.itratel.dao;
 
 import com.itratel.model.Message;
 import com.itratel.model.PageInfo;
-import com.itratel.util.JdbcUtil;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+/**
+ * <p>留言数据访问层</p>
+ * @author yinhao
+ * @date 2019/12/18 00:55
+ */
 public class MessageDao {
+
     /**
      * 根据查询条件，查询文章分页信息
      *
@@ -19,58 +19,7 @@ public class MessageDao {
      * @return 查询结果
      */
     public PageInfo<Message> findMessage(Message searchModel, int pageNum, int pageSize) {
-        PageInfo<Message> result;
-        // 存放查询参数
-        List<Object> paramList = new ArrayList<>();
-        int id = searchModel.getId();
-        StringBuilder sql = new StringBuilder("select a.*, m.name as mname, s.name as sname from " +
-                "message a left join maincategory m on a.main_id=m.id left join subcategory s on a.sub_id = s.id where 1=1 ");
-        StringBuilder countSql = new StringBuilder("select count(id) as totalRecord from message where 1=1 ");
-        if (id != 0) {
-            sql.append(" and a.id = ?");
-            countSql.append(" and id = ?");
-            paramList.add(id);
-        }
-        sql.append(" ORDER BY top desc,createdate desc ");
-        countSql.append(" ORDER BY top desc,createdate desc ");
-        // 起始索引
-        int fromIndex = pageSize * (pageNum - 1);
-        // 使用limit关键字，实现分页
-        sql.append(" limit " + fromIndex + ", " + pageSize);
-        // 存放所有查询出的文章对象
-        List<Message> studentList = new ArrayList<>();
-        JdbcUtil jdbcUtil = null;
-        try {
-            jdbcUtil = new JdbcUtil();
-            jdbcUtil.getConnection(); // 获取数据库链接
-            // 获取总记录数
-            List<Map<String, Object>> countResult = jdbcUtil.findResult(countSql.toString(), paramList);
-            Map<String, Object> countMap = countResult.get(0);
-            int totalRecord = ((Number) countMap.get("totalRecord")).intValue();
-            // 获取查询的文章记录
-            List<Map<String, Object>> studentResult = jdbcUtil.findResult(sql.toString(), paramList);
-            if (studentResult != null) {
-                for (Map<String, Object> map : studentResult) {
-                    Message s = new Message(map);
-                    studentList.add(s);
-                }
-            }
-            //获取总页数
-            int totalPage = totalRecord / pageSize;
-            if (totalRecord % pageSize != 0) {
-                totalPage++;
-            }
-            // 组装pager对象
-            result = new PageInfo<>(pageSize, pageNum, totalRecord, totalPage, studentList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException("查询所有数据异常！", e);
-        } finally {
-            if (jdbcUtil != null) {
-                jdbcUtil.releaseConn(); // 释放资源
-            }
-        }
-        return result;
+        return new PageInfo<>();
     }
 
     /**
@@ -80,18 +29,7 @@ public class MessageDao {
      * @return 插入结果
      */
     public boolean addMessage(Message message) {
-        boolean result = false;
-        StringBuilder sql = new StringBuilder("insert into message(title,subtitle,md_content,html_content," +
-                    "createdate,main_id,top) values(?,?,?,?,?,?,?);");
-        JdbcUtil jdbcUtil;
-        try {
-            jdbcUtil = new JdbcUtil();
-            jdbcUtil.getConnection(); // 获取数据库连接
-            result = jdbcUtil.updateByPreparedStatement(sql.toString(), message.toList());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return false;
     }
 
     /**
@@ -102,21 +40,7 @@ public class MessageDao {
      * @return 更新结果
      */
     public boolean updateMessage(Message message, int id) {
-        boolean result = false;
-        StringBuilder sql = new StringBuilder("update message set title = ?,subtitle = ?,md_content = ?,html_content = ?," +
-                    "createdate = ?,sub_id = ?,main_id = ?,top = ?  where id = ? ");
-
-        JdbcUtil jdbcUtil;
-        ArrayList paramList = (ArrayList) message.toList();
-        paramList.add(id);
-        try {
-            jdbcUtil = new JdbcUtil();
-            jdbcUtil.getConnection(); // 获取数据库连接
-            result = jdbcUtil.updateByPreparedStatement(sql.toString(), paramList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return false;
     }
 
     /**
@@ -126,19 +50,6 @@ public class MessageDao {
      * @return 删除结果
      */
     public boolean deleteMessage(int id) {
-        boolean result = false;
-        StringBuilder sql =
-                new StringBuilder("delete from message where id = ?;");
-        JdbcUtil jdbcUtil;
-        List<Object> paramList = new ArrayList<>();
-        paramList.add(id);
-        try {
-            jdbcUtil = new JdbcUtil();
-            jdbcUtil.getConnection(); // 获取数据库连接
-            result = jdbcUtil.updateByPreparedStatement(sql.toString(), paramList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return false;
     }
 }

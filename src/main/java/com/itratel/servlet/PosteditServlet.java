@@ -1,7 +1,8 @@
 package com.itratel.servlet;
 
 import com.itratel.model.Article;
-import com.itratel.service.ArticleService;
+import com.itratel.service.IArticleService;
+import com.itratel.service.impl.ArticleServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +13,14 @@ import java.io.IOException;
 
 @WebServlet(name = "PosteditServlet")
 public class PosteditServlet extends HttpServlet {
-    ArticleService articleService;
+    IArticleService articleService;
     Article article;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        articleService = new ArticleService();
+        articleService = new ArticleServiceImpl();
         String action = request.getParameter("action");
         int id=0;
         if (action.equals("delete")) {

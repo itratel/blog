@@ -84,16 +84,6 @@
 </head>
 
 <body>
-<%
-    if(session.getAttribute("username") == null) {
-%>
-<script type="text/javascript" language="javascript">
-    alert("您还没有登录，请先登录");
-    top.location.href="../login.jsp";
-</script>
-<%
-    }
-%>
 <div class="container-fluid">
     <div class="row">
         <div id="left-nav" class="col-md-2">
@@ -108,16 +98,7 @@
                     <a href="<%=context %>/admin/add.jsp">
                         <li>写文章</li>
                     </a>
-                    <a href="<%=context %>/servlet/CategoryServlet?action=getall">
-                        <li>分类</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>评论</li>
-                    </a>
-                    <a href="https://changyan.kuaizhan.com/">
-                        <li>留言</li>
-                    </a>
-                    <a href="<%=context %>/index.html">
+                    <a href="<%=context %>/index.jsp">
                         <li>返回首页</li>
                     </a>
                 </ul>
@@ -135,22 +116,20 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>序号</th>
                         <th>标题</th>
-                        <th>主分类</th>
-                        <th>二级分类</th>
-                        <th>日期</th>
+                        <th>发表日期</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${result.dataList }" var="article">
+                    <c:forEach items="${result.dataList }" var="article" varStatus="status">
                     <tr>
+                        <td>${status.index + 1}</td>
                         <td><c:out value="${article.title }"></c:out></td>
-                        <td><c:out value="${article.mname }"></c:out></td>
-                        <td><c:out value="${article.sname }"></c:out></td>
-                        <td><c:out value="${article.createdate }"></c:out></td>
+                        <td><c:out value="${article.date}"></c:out></td>
                         <td>
-                            <a href="<%=context %>/servlet/PostlistServlet?role=3&id=${article.id }">
+                            <a href="<%=context%>/servlet/PostlistServlet?role=3&id=${article.id }">
                                 <button type="button" class="btn btn-primary">修改</button>
                             </a>
                         </td>
@@ -160,21 +139,21 @@
                 <br>
                 <div id="News-Pagination" style="float: right"></div>
             </c:if>
-            <div class="fiter col-md-4">
-                <form class="form-horizontal form-inline" action="<%=context %>/servlet/PostlistServlet?role=1"
-                      method="post" id="postForm">
-                    <select class="form-control" name="main_id" id="main_id" onchange="getSubCatagory()">
-                        <option value="0">一级分类</option>
-                        <c:forEach items="${mainCategory}" var="category">
-                            <option value="${category.id }">${category.name }</option>
-                        </c:forEach>
-                    </select>
-                    <select class="form-control" name="sub_id" id="sub_id">
-                        <option value="0">二级分类</option>
-                    </select>
-                    <button type="submit" class="btn btn-success">过滤</button>
-                </form>
-            </div>
+            <%--<div class="fiter col-md-4">--%>
+                <%--<form class="form-horizontal form-inline" action="<%=context %>/servlet/PostlistServlet?role=1"--%>
+                      <%--method="post" id="postForm">--%>
+                    <%--<select class="form-control" name="main_id" id="main_id" onchange="getSubCatagory()">--%>
+                        <%--<option value="0">一级分类</option>--%>
+                        <%--<c:forEach items="${mainCategory}" var="category">--%>
+                            <%--<option value="${category.id }">${category.name }</option>--%>
+                        <%--</c:forEach>--%>
+                    <%--</select>--%>
+                    <%--<select class="form-control" name="sub_id" id="sub_id">--%>
+                        <%--<option value="0">二级分类</option>--%>
+                    <%--</select>--%>
+                    <%--<button type="submit" class="btn btn-success">过滤</button>--%>
+                <%--</form>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>
