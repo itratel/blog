@@ -15,6 +15,8 @@ public class Constants {
     public static final String UPDATE = "update";
     public static final String GET_ONE = "getOne";
     public static final String GET_PAGE = "page";
+    public static final String TOP_THREE = "top3";
+    public static final String GET_ALL = "getAll";
 
     public static final String ID = "id";
     public static final String USERNAME = "username";

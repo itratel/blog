@@ -5,13 +5,13 @@ import com.itratel.model.PageInfo;
 import com.itratel.service.IArticleService;
 import com.itratel.service.impl.ArticleServiceImpl;
 import com.itratel.util.StrUtil;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import static com.itratel.constant.Constants.*;
 
@@ -30,9 +30,13 @@ public class ArticleServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         //因为servlet是单例的，因此为了线程安全，禁止初始化实例变量
         String action = request.getParameter(ACTION);
+        if (StrUtil.isEmpty(action)) {
+            action = TOP_THREE;
+        }
         switch (action) {
             case GET_PAGE:
                 page(request, response);
+                break;
             case DELETE:
                 delete(request, response);
                 break;
@@ -45,9 +49,24 @@ public class ArticleServlet extends HttpServlet {
             case GET_ONE:
                 getOne(request, response);
                 break;
+            case TOP_THREE:
+                listTop3(request, response);
+                break;
             default:
                 break;
         }
+    }
+
+    /***
+     * 查询top3的文章
+     * @param request request
+     * @param response response
+     */
+    private void listTop3(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IArticleService articleService = new ArticleServiceImpl();
+        List<Article> list = articleService.listTop3Article();
+        request.setAttribute("list", list);
+        request.getRequestDispatcher(request.getContextPath() + "/index.jsp").forward(request, response);
     }
 
     /***

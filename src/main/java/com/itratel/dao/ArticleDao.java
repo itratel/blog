@@ -3,6 +3,7 @@ package com.itratel.dao;
 import com.itratel.model.Article;
 import com.itratel.model.PageInfo;
 import com.itratel.util.JdbcUtil;
+import com.itratel.util.OptionalUtil;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -19,9 +20,28 @@ import java.util.List;
  * @date 2019/12/18 00:55
  */
 public class ArticleDao {
+
+    /***
+     * 查询前三个文章
+     * @return List<Article>
+     */
+    public List<Article> listTop3Article() {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "select id, title, md_content as mdContent, html_content as htmlContent, date from article limit ?";
+        QueryRunner runner = new QueryRunner();
+        try {
+            List<Article> top3List = runner.query(conn, sql, new BeanListHandler<>(Article.class), 3);
+            return OptionalUtil.listOption(top3List);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return null;
+    }
+
     /**
      * 根据查询条件，查询文章分页信息
-     *
      * @param pageNum  查询第几页数据
      * @param pageSize 每页显示多少条记录
      * @return 查询结果

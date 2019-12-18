@@ -5,14 +5,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>NIC|BLOG</title>
+    <title>殷豪的博客</title>
     <%
         String context = request.getContextPath();
     %>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
-    <meta name="keywords" content="倪畅,烟台大学,计算机,学生,个人主页,HTML,CSS,PHP,JavaScript,jQuery,XML,AJAX,,SQL,bootstrap,Python"/>
-    <meta name="description" content="倪畅的个人主页"/>
     <link rel="shortcut icon" href="<%=context %>/img/favicon.ico"/>
     <link rel="stylesheet" href="<%=context %>/css/blog.css"/>
     <link rel="stylesheet" href="<%=context %>/css/page.css">
@@ -23,6 +21,26 @@
     <script src="<%=context %>/js/blog.js"></script>
     <script src="<%=context %>/js/bootstrap.min.js"></script>
     <script src="<%=context %>/js/prism.js"></script>
+    <script>
+        // 点击分页按钮以后触发的动作
+        function handlePaginationClick(new_page_index, pagination_container) {
+            $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
+            $("#postForm").submit();
+            return false;
+        }
+
+        $(function () {
+            $("#News-Pagination").pagination(${result.total}, {
+                items_per_page:${result.pageSize}, // 每页显示多少条记录
+                current_page: ${result.curPage} -1, // 当前显示第几页数据
+                num_display_entries: 3, // 分页显示的条目数
+                next_text: "下一页",
+                prev_text: "上一页",
+                num_edge_entries: 2, // 连接分页主体，显示的条目数
+                callback: handlePaginationClick
+            });
+        })
+    </script>
 </head>
 <body>
 <div id="bar" class="scrollbar"></div>
@@ -33,41 +51,7 @@
     </div>
 </div>
 <div id="left-nav">
-    <div class="author-nav">
-        <img src="<%=context %>/img/avatar.jpg" alt="个人头像">
-    </div>
-    <div class="main-nav">
-        <ul>
-            <a href="<%=context %>/index.html">
-                <li>返回主页</li>
-            </a>
-            <a href="#">
-                <li>博客首页</li>
-            </a>
-            <c:forEach items="${mainCategory}" var="maincatetory">
-                <c:if test="${maincatetory.name!='工程'}">
-                    <a href="javascript:void(0)" class="havasub">
-                        <li>${maincatetory.name }</li>
-                    </a>
-                    <ul class="submenu">
-                        <c:forEach items="${maincatetory.sublist}" var="subcatetory">
-                            <a href="PostlistServlet?role=0&sub_id=${subcatetory.id}">
-                                <li>
-                                        ${subcatetory.name}
-                                </li>
-                            </a>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-            </c:forEach>
-            <a href="<%=context %>/servlet/dispatcher?role=4&main_id=1">
-                <li>工程</li>
-            </a>
-            <a href="<%=context %>/servlet/article?action=page">
-                <li>控制台</li>
-            </a>
-        </ul>
-    </div>
+    <jsp:include page="navigation.jsp"/>
 </div>
 <div id="wrap">
     <div id="main">
@@ -77,58 +61,16 @@
                     <div class="col-md-8 col-md-offset-2 col-xs-12">
                         <div class="single-title"><h2>${article.title }</h2></div>
                         <div class="single-info">
-                            发表于${fn:substring(article.createdate,0,10)}&nbsp;|&nbsp;分类于${article.sname }</div>
+                            发表于${fn:substring(article.date,0,10)}</div>
                         <div class="single-content">${article.htmlContent }</div>
                         <br>
-                            <%--畅言--%>
-                        <!--PC和WAP自适应版-->
-                        <div id="SOHUCS" sid="${article.id }"></div>
-                        <script type="text/javascript">
-                            (function () {
-                                var appid = 'cytraPrxk';
-                                var conf = 'prod_07bc0b79d648203975558480241d0645';
-                                var width = window.innerWidth || document.documentElement.clientWidth;
-                                if (width < 960) {
-                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
-                                } else {
-                                    var loadJs = function (d, a) {
-                                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-                                        var b = document.createElement("script");
-                                        b.setAttribute("type", "text/javascript");
-                                        b.setAttribute("charset", "UTF-8");
-                                        b.setAttribute("src", d);
-                                        if (typeof a === "function") {
-                                            if (window.attachEvent) {
-                                                b.onreadystatechange = function () {
-                                                    var e = b.readyState;
-                                                    if (e === "loaded" || e === "complete") {
-                                                        b.onreadystatechange = null;
-                                                        a()
-                                                    }
-                                                }
-                                            } else {
-                                                b.onload = a
-                                            }
-                                        }
-                                        c.appendChild(b)
-                                    };
-                                    loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-                                        window.changyan.api.config({appid: appid, conf: conf})
-                                    });
-                                }
-                            })(); </script>
                     </div>
                 </c:forEach>
+                <div id="News-Pagination"></div>
             </div>
         </div>
     </div>
-    <footer>
-        <div id="block">
-            <span id="beian">鲁ICP备18011092号 · </span>
-            <span id="demo"></span>
-        </div>
-        Copyright © 2018 nichang.site <span>托管于阿里云</span>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 </html>

@@ -12,7 +12,7 @@
 </div>
 <div class="main-nav">
     <ul>
-        <a href="<%=context %>/index.jsp">
+        <a href="<%=context %>/servlet/article?action=top3">
             <li>博客首页</li>
         </a>
         <a href="<%=context %>/list.jsp">

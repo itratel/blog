@@ -5,6 +5,8 @@ import com.itratel.model.Article;
 import com.itratel.model.PageInfo;
 import com.itratel.service.IArticleService;
 
+import java.util.List;
+
 
 /**
  * <p>文章业务层</p>
@@ -17,6 +19,16 @@ public class ArticleServiceImpl implements IArticleService {
 
     public ArticleServiceImpl() {
         articleDao = new ArticleDao();
+    }
+
+
+    /***
+     * 查询前三个文章
+     * @return List<Article>
+     */
+    @Override
+    public List<Article> listTop3Article() {
+        return articleDao.listTop3Article();
     }
 
     /***

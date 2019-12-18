@@ -85,7 +85,7 @@
         </div>
     </div>
     <div id="main">
-        <form id="postForm" method="POST" action="<%=context %>/servlet/dispatcher">
+        <form id="postForm" method="POST">
             <div class="container main-inner">
                 <div class="row">
                     <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
@@ -96,8 +96,8 @@
                                         <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
                                     </h2>
                                     <div class="post-detial">
-                                        <span>${article.sname}</span>
-                                        <span>${fn:substring(article.createdate,0,10)}</span>
+                                        <span>${article.title}</span>
+                                        <span>${fn:substring(article.date,0,10)}</span>
                                     </div>
                                 </div>
                                 <p>${article.subtitle }</p>
@@ -114,13 +114,7 @@
             </div>
         </form>
     </div>
-    <footer>
-        <div id="block">
-            <span id="beian">xxxxxxxxxx</span>
-            <span id="demo"></span>
-        </div>
-        Copyright © itratel <span></span>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 

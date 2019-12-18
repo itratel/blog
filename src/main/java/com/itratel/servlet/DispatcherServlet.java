@@ -1,11 +1,5 @@
 package com.itratel.servlet;
 
-import com.itratel.model.Article;
-import com.itratel.model.PageInfo;
-import com.itratel.service.IArticleService;
-import com.itratel.service.impl.ArticleServiceImpl;
-import com.itratel.util.StrUtil;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
@@ -31,13 +25,9 @@ public class DispatcherServlet extends HttpServlet {
         response.setCharacterEncoding(UTF8);
         // 接收request里的参数
         String role = request.getParameter(ROLE);
-
         switch (role) {
             case "0":
                 request.getRequestDispatcher(request.getContextPath() + "/index.jsp").forward(request, response);
-                break;
-            case "1":
-                request.getRequestDispatcher(request.getContextPath() + "/admin/query.jsp").forward(request, response);
                 break;
             case "2":
                 request.getRequestDispatcher(request.getContextPath() + "/article.jsp").forward(request, response);

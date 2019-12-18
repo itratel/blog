@@ -71,32 +71,12 @@
                         <td>${status.index + 1}</td>
                         <td><c:out value="${article.title }"></c:out></td>
                         <td><c:out value="${article.date}"></c:out></td>
-                        <td>
-                            <a href="<%=context%>/servlet/article?action=getOne&id=${article.id }">
-                                <button type="button" class="btn btn-primary">修改</button>
-                            </a>
-                        </td>
                     </tr>
                     </c:forEach>
                 </table>
                 <br>
                 <div id="News-Pagination" style="float: right"></div>
             </c:if>
-            <%--<div class="fiter col-md-4">--%>
-                <%--<form class="form-horizontal form-inline" action="<%=context %>/servlet/dispatcher?role=1"--%>
-                      <%--method="post" id="postForm">--%>
-                    <%--<select class="form-control" name="main_id" id="main_id" onchange="getSubCatagory()">--%>
-                        <%--<option value="0">一级分类</option>--%>
-                        <%--<c:forEach items="${mainCategory}" var="category">--%>
-                            <%--<option value="${category.id }">${category.name }</option>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                    <%--<select class="form-control" name="sub_id" id="sub_id">--%>
-                        <%--<option value="0">二级分类</option>--%>
-                    <%--</select>--%>
-                    <%--<button type="submit" class="btn btn-success">过滤</button>--%>
-                <%--</form>--%>
-            <%--</div>--%>
         </div>
     </div>
 </div>

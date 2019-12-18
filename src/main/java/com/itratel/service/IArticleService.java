@@ -3,12 +3,21 @@ package com.itratel.service;
 import com.itratel.model.Article;
 import com.itratel.model.PageInfo;
 
+import java.util.List;
+
 /**
  * <p>文章业务层接口</p>
  * @author yinhao
  * @date 2019/12/18 00:55
  */
 public interface IArticleService {
+
+
+    /***
+     * 查询前三个文章
+     * @return List<Article>
+     */
+    List<Article> listTop3Article();
 
     /***
      * 分页查询文章

@@ -34,7 +34,8 @@ public class LoginServlet extends HttpServlet {
         if ((userService.verifyUser(username, password)) && (re.equals(answer))) {
             HttpSession session = request.getSession();
             session.setAttribute(USERNAME, username);
-            session.setMaxInactiveInterval(3 * 60);
+            //10分钟过期
+            session.setMaxInactiveInterval(10 * 60);
             response.sendRedirect("article?" + ACTION + "=" + GET_PAGE);
         } else {
             request.getRequestDispatcher(request.getContextPath() + "/error.jsp").forward(request, response);
