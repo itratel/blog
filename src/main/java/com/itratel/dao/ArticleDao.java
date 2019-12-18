@@ -26,7 +26,7 @@ public class ArticleDao {
      * @param pageSize 每页显示多少条记录
      * @return 查询结果
      */
-    public PageInfo<Article> findArticle(int pageNum, int pageSize) {
+    public PageInfo<Article> listArticle(int pageNum, int pageSize) {
         PageInfo<Article> pageInfo;
         // 存放查询参数
         StringBuilder sql = new StringBuilder("select * from article");
@@ -69,12 +69,10 @@ public class ArticleDao {
         Connection conn = JdbcUtil.getConnection();
         QueryRunner runner = new QueryRunner();
         boolean result = false;
-        String sql = "insert into article(title, md_content, html_content, date) values(?, ?, ?, ?)";
+        String sql = "insert into article(title, md_content, html_content) values(?, ?, ?)";
         try {
-            Article insert = runner.insert(conn, sql, new BeanHandler<>(Article.class), Article.getParams(article));
-            if (insert != null) {
-                result = true;
-            }
+            runner.insert(conn, sql, new BeanHandler<>(Article.class), Article.getParams(article));
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -94,8 +92,8 @@ public class ArticleDao {
         Connection conn = JdbcUtil.getConnection();
         QueryRunner runner = new QueryRunner();
         boolean result = false;
-        String sql = "update article set title = ?, md_content = ?, html_content = ?, date = ? where id = ?";
-        Object[] params = new Object[]{article.getTitle(), article.getMdContent(), article.getHtmlContent(), article.getDate(), id};
+        String sql = "update article set title = ?, md_content = ?, html_content = ? where id = ?";
+        Object[] params = new Object[]{article.getTitle(), article.getMdContent(), article.getHtmlContent(), id};
         try {
             runner.update(conn, sql, params);
             result = true;

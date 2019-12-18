@@ -13,30 +13,21 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.itratel.servlet.LoginServlet</servlet-class>
+        <servlet-name>article</servlet-name>
+        <servlet-class>com.itratel.servlet.ArticleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/servlet/LoginServlet</url-pattern>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/servlet/article</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>PosteditServlet</servlet-name>
-        <servlet-class>com.itratel.servlet.PosteditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PosteditServlet</servlet-name>
-        <url-pattern>/servlet/PosteditServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ImgServlet</servlet-name>
+        <servlet-name>img</servlet-name>
         <servlet-class>com.itratel.servlet.ImgServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ImgServlet</servlet-name>
-        <url-pattern>/servlet/ImgServlet</url-pattern>
+        <servlet-name>img</servlet-name>
+        <url-pattern>/servlet/img</url-pattern>
     </servlet-mapping>
 
     <filter>

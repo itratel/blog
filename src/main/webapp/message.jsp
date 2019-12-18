@@ -71,22 +71,7 @@
     </div>
 </div>
 <div id="left-nav">
-    <div class="author-nav">
-        <img src="<%=context %>/img/avatar.jpg" alt="个人头像">
-    </div>
-    <div class="main-nav">
-        <ul>
-            <a href="<%=context %>/index.jsp">
-                <li>返回主页</li>
-            </a>
-            <a href="#">
-                <li>博客首页</li>
-            </a>
-            <a href="<%=context %>/servlet/PostlistServlet?role=1">
-                <li>控制台</li>
-            </a>
-        </ul>
-    </div>
+    <jsp:include page="navigation.jsp"/>
 </div>
 <div id="wrap">
     <div id="top">

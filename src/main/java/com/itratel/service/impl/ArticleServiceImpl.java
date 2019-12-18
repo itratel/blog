@@ -26,8 +26,8 @@ public class ArticleServiceImpl implements IArticleService {
      * @return PageInfo<Article>
      */
     @Override
-    public PageInfo<Article> findArticle(int pageNum, int pageSize) {
-        return articleDao.findArticle(pageNum, pageSize);
+    public PageInfo<Article> listArticle(int pageNum, int pageSize) {
+        return articleDao.listArticle(pageNum, pageSize);
     }
 
     /***

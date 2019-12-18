@@ -16,6 +16,12 @@ import java.sql.SQLException;
  */
 public class UserDao {
 
+    /***
+     * 根据用户名和密码查询用户名称和密码
+     * @param username 用户名
+     * @param password 密码
+     * @return boolean
+     */
     public boolean verifyUser(String username, String password) {
         Connection conn = JdbcUtil.getConnection();
         QueryRunner runner = new QueryRunner();
@@ -32,12 +38,16 @@ public class UserDao {
         return false;
     }
 
+    /***
+     * 获取当前用户
+     * @return User
+     */
     public User getUser() {
         Connection conn = JdbcUtil.getConnection();
         QueryRunner runner = new QueryRunner();
         try {
-            String sql = "select * from user where username = 殷豪";
-            return runner.query(conn, sql, new BeanHandler<>(User.class));
+            String sql = "select * from user where username = ?";
+            return runner.query(conn, sql, new BeanHandler<>(User.class), "殷豪");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

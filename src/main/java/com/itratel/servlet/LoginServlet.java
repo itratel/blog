@@ -11,35 +11,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.itratel.constant.Constants.*;
+
 /**
  * <p>登录接口</p>
  * @author yinhao
  * @date 2019/12/18 00:55
  */
-@WebServlet(name = "LoginServlet")
+@WebServlet(name = "login", urlPatterns = {"/servlet/login"})
 public class LoginServlet extends HttpServlet {
-
-    private IUserService userService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        userService = new UserServiceImpl();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String re = request.getParameter("VerifyCode");
-        String answer = (String) request.getSession().getAttribute("VerifyCode");
+        request.setCharacterEncoding(UTF8);
+        response.setCharacterEncoding(UTF8);
+        IUserService userService = new UserServiceImpl();
+        String username = request.getParameter(USERNAME);
+        String password = request.getParameter(PASSWORD);
+        String re = request.getParameter(VERIFY_CODE);
+        String answer = (String) request.getSession().getAttribute(VERIFY_CODE);
         if ((userService.verifyUser(username, password)) && (re.equals(answer))) {
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute(USERNAME, username);
             session.setMaxInactiveInterval(3 * 60);
             response.sendRedirect("PostlistServlet?role=1");
         } else {
             request.getRequestDispatcher(request.getContextPath() + "/error.jsp").forward(request, response);
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

@@ -16,7 +16,7 @@ public interface IArticleService {
      * @param pageSize 每页大小
      * @return PageInfo<Article>
      */
-    PageInfo<Article> findArticle(int pageNum, int pageSize);
+    PageInfo<Article> listArticle(int pageNum, int pageSize);
 
 
     /***
@@ -30,6 +30,7 @@ public interface IArticleService {
     /***
      * 修改文章
      * @param article 文章
+     * @param id 主键
      * @return boolean
      */
     boolean updateArticle(Article article, int id);

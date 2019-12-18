@@ -1,9 +1,5 @@
 package com.itratel.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * <p>文章实体</p>
  * @author yinhao
@@ -40,15 +36,6 @@ public class Article {
         this.mdContent = mdContent;
         this.htmlContent = htmlContent;
         this.date = date;
-    }
-
-    public Article(Map<String, Object> map) {
-        this.id = (int) map.get("id");
-        this.title = (String) map.get("title");
-        this.mdContent = (String) map.get("mdContent");
-        this.htmlContent = (String) map.get("htmlContent");
-        this.date = (String) map.get("date");
-
     }
 
     public int getId() {
@@ -91,17 +78,8 @@ public class Article {
         this.date = date;
     }
 
-    public List toList() {
-        List<String> list = new ArrayList<>();
-        list.add(title);
-        list.add(mdContent);
-        list.add(htmlContent);
-        list.add(date);
-        return list;
-    }
-
     public static Object[] getParams(Article article) {
-        return new Object[]{article.getTitle(), article.getMdContent(), article.getHtmlContent(), article.getDate()};
+        return new Object[]{article.getTitle(), article.getMdContent(), article.getHtmlContent()};
     }
 
 }

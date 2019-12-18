@@ -4,7 +4,12 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
-public class JdbcUtil {
+/**
+ * <p>数据库工具</p>
+ * @author yinhao
+ * @date 2019/12/18 00:55
+ */
+public final class JdbcUtil {
 
     /***
      * 数据库的用户名

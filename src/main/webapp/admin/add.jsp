@@ -23,12 +23,12 @@
     <script src="../js/editormd.min.js"></script>
     <script type="text/javascript">
         function beforeSubmit(form) {
-            if (form.title.value == '') {
+            if (form.title.value === '') {
                 alert('文章标题不能为空！');
                 form.title.focus();
                 return false;
             }
-            if (form.test-editormd-markdown-doc.value == 0) {
+            if (form.test-editormd-markdown-doc.value === '') {
                 alert('文章内容不能为空！');
                 form.category.focus();
                 return false;
@@ -58,7 +58,7 @@
                 </ul>
             </div>
         </div>
-        <form class="form-inline" action="<%=context %>/servlet/PosteditServlet?action=add" method="post"
+        <form class="form-inline" action="<%=context %>/servlet/article?action=add" method="post"
               onSubmit="return beforeSubmit(this);">
             <div id="edit" class="col-md-8 col-xs-12">
                 <h3>撰写新文章</h3>
@@ -68,7 +68,7 @@
                 <div class="editormd" id="test-editormd">
                     <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
                     <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
-                    <textarea class="editormd-html-textarea" name="text"></textarea>
+                    <textarea class="editormd-html-textarea" name="html_content"></textarea>
                 </div>
                 <script type="text/javascript">
                     $(function () {

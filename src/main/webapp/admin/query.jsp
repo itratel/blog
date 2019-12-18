@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+﻿<%@ page import="static com.itratel.constant.Constants.USERNAME" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
                 $.ajax({
                     type: "POST",
                     async: true,
-                    url: "<%=context %>/servlet/PosteditServlet",
+                    url: "<%=context %>/servlet/article",
                     data: {
                         "action": "delete",
                         "id": id
@@ -43,12 +44,14 @@
                 })
             }
         }
+
         // 点击分页按钮以后触发的动作
         function handlePaginationClick(new_page_index, pagination_container) {
             $("#postForm").attr("action", "<%=context %>/servlet/PostlistServlet?role=1&pageNum=" + (new_page_index + 1));
             $("#postForm").submit();
             return false;
         }
+
         $(function () {
             $("#News-Pagination").pagination(${result.total}, {
                 items_per_page:${result.pageSize}, // 每页显示多少条记录
@@ -65,11 +68,11 @@
 
 <body>
 <%
-    if(session.getAttribute("username") == null) {
+    if (session.getAttribute(USERNAME) == null) {
 %>
 <script type="text/javascript" language="javascript">
     alert("您还没有登录，请先登录");
-    top.location.href="../login.jsp";
+    top.location.href = "../login.jsp";
 </script>
 <%
     }

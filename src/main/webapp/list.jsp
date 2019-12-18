@@ -47,7 +47,7 @@
                 $.ajax({
                     type: "POST",
                     async: true,
-                    url: "<%=context %>/servlet/PosteditServlet",
+                    url: "<%=context %>/servlet/article",
                     data: {
                         "action": "delete",
                         "id": id
@@ -87,22 +87,7 @@
 <div class="container-fluid">
     <div class="row">
         <div id="left-nav" class="col-md-2">
-            <div class="author-nav">
-                <img src="../img/avatar.jpg" alt="个人头像">
-            </div>
-            <div class="main-nav">
-                <ul>
-                    <a href="#">
-                        <li class="current">所有文章</li>
-                    </a>
-                    <a href="<%=context %>/admin/add.jsp">
-                        <li>写文章</li>
-                    </a>
-                    <a href="<%=context %>/index.jsp">
-                        <li>返回首页</li>
-                    </a>
-                </ul>
-            </div>
+            <jsp:include page="navigation.jsp"/>
         </div>
         <div id="list" class="col-md-10 col-xs-12">
             <h3>管理</h3>
