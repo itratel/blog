@@ -20,7 +20,7 @@ import static com.itratel.util.StrUtil.wrapperInt;
  * @author yinhao
  * @date 2019/12/18 00:55
  */
-@WebServlet(name = "img")
+@WebServlet(name = "img", urlPatterns = {"/servlet/img"})
 public class ImgServlet extends HttpServlet {
 
     @Override

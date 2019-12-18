@@ -6,6 +6,7 @@ import java.util.*;
 
 /**
  * <p>数据库工具</p>
+ *
  * @author yinhao
  * @date 2019/12/18 00:55
  */
@@ -14,26 +15,26 @@ public final class JdbcUtil {
     /***
      * 数据库的用户名
      */
-    private static String USERNAME;
+    private static String username;
     /***
      * 数据库的密码
      */
-    private static String PASSWORD;
+    private static String password;
     /***
      * 定义数据库的驱动信息
      */
-    private static String DRIVER;
+    private static String driver;
     /**
      * 数据库的地址
      */
-    private static String URL;
+    private static String url;
 
     static {
         try {
             //加载数据库配置信息，并给相关的属性赋值
             loadConfig();
             // 注册驱动
-            Class.forName(DRIVER);
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,10 +49,10 @@ public final class JdbcUtil {
             InputStream inStream = JdbcUtil.class.getResourceAsStream("/jdbc.properties");
             Properties prop = new Properties();
             prop.load(inStream);
-            USERNAME = prop.getProperty("jdbc.username");
-            PASSWORD = prop.getProperty("jdbc.password");
-            DRIVER = prop.getProperty("jdbc.driver");
-            URL = prop.getProperty("jdbc.url");
+            username = prop.getProperty("jdbc.username");
+            password = prop.getProperty("jdbc.password");
+            driver = prop.getProperty("jdbc.driver");
+            url = prop.getProperty("jdbc.url");
         } catch (Exception e) {
             throw new RuntimeException("读取数据库配置文件异常！", e);
         }
@@ -67,7 +68,7 @@ public final class JdbcUtil {
         Connection connection;
         try {
             // 获取连接
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             throw new RuntimeException("get connection error!", e);
         }

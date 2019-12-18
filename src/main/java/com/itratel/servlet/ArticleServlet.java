@@ -19,7 +19,7 @@ import static com.itratel.constant.Constants.*;
  * @author yinhao
  * @date 2019/12/18 00:55
  */
-@WebServlet(name = "article")
+@WebServlet(name = "article", urlPatterns = {"/servlet/article"})
 public class ArticleServlet extends HttpServlet {
 
     @Override

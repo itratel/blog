@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -21,48 +21,6 @@
         String context = request.getContextPath();
     %>
     <script>
-        function getSubCatagory() {
-            var main_id = $("#main_id").val();
-            $.ajax({
-                dataType: "json",    //数据类型为json格式
-                type: "GET",
-                url: "<%=context %>/servlet/CategoryServlet?action=ajaxsub",
-                data: {"main_id": main_id},
-                success: function (data, textStatus) {
-                    var sub_id = $("#sub_id");
-                    sub_id.empty();
-                    sub_id.append('<option value="0">二级分类</option>');
-                    $.each(data, function (key, val) {
-                        sub_id.append('<option value="' + key + '">' + val + '</option>');
-                    })
-                },
-                error: function (xhr, status, errMsg) {
-                    alert("获取分类失败");
-                }
-            })
-        }
-
-        function deletePost(id) {
-            if (confirm("确定删除文章？")) {
-                $.ajax({
-                    type: "POST",
-                    async: true,
-                    url: "<%=context %>/servlet/article",
-                    data: {
-                        "action": "delete",
-                        "id": id
-                    },
-                    success: function (data) {
-                        alert(data);
-                        window.location.reload();
-                    },
-                    error: function () {
-                        alert("请求失败");
-                    },
-                    dataType: "text"
-                })
-            }
-        }
         // 点击分页按钮以后触发的动作
         function handlePaginationClick(new_page_index, pagination_container) {
             $("#postForm").attr("action", "<%=context %>/servlet/PostlistServlet?role=1&pageNum=" + (new_page_index + 1));

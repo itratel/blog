@@ -12,24 +12,6 @@
         <url-pattern>/servlet/PostlistServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>article</servlet-name>
-        <servlet-class>com.itratel.servlet.ArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>article</servlet-name>
-        <url-pattern>/servlet/article</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>img</servlet-name>
-        <servlet-class>com.itratel.servlet.ImgServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>img</servlet-name>
-        <url-pattern>/servlet/img</url-pattern>
-    </servlet-mapping>
-
     <filter>
         <filter-name>AdminFilter</filter-name>
         <filter-class>com.itratel.filter.AdminFilter</filter-class>
