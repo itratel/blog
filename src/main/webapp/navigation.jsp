@@ -24,7 +24,7 @@
         <a href="<%=context %>/message.jsp">
             <li>留言</li>
         </a>
-        <a href="<%=context %>/servlet/PostlistServlet?role=1">
+        <a href="<%=context %>/servlet/article?action=page">
             <li>后台登陆</li>
         </a>
     </ul>

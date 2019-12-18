@@ -42,7 +42,7 @@
     <script>
         // 点击分页按钮以后触发的动作
         function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/PostlistServlet?role=0&pageNum=" + (new_page_index + 1));
+            $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
             $("#postForm").submit();
             return false;
         }
@@ -85,7 +85,7 @@
         </div>
     </div>
     <div id="main">
-        <form id="postForm" method="POST" action="<%=context %>/servlet/PostlistServlet">
+        <form id="postForm" method="POST" action="<%=context %>/servlet/dispatcher">
             <div class="container main-inner">
                 <div class="row">
                     <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
@@ -93,7 +93,7 @@
                             <article class="index-article">
                                 <div class="post-info">
                                     <h2>
-                                        <a href="<%=context %>/servlet/PostlistServlet?role=2&id=${article.id}">${article.title }</a>
+                                        <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
                                     </h2>
                                     <div class="post-detial">
                                         <span>${article.sname}</span>
@@ -103,7 +103,7 @@
                                 <p>${article.subtitle }</p>
                                 <center>
                                     <button class="more"><a
-                                            href="<%=context %>/servlet/PostlistServlet?role=2&id=${article.id}"
+                                            href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}"
                                             style="color: #000;">Read More</a></button>
                                 </center>
                             </article>

@@ -23,7 +23,7 @@
     <script>
         // 点击分页按钮以后触发的动作
         function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/PostlistServlet?role=1&pageNum=" + (new_page_index + 1));
+            $("#postForm").attr("action", "<%=context %>/servlet/article?action=page&pageNum=" + (new_page_index + 1));
             $("#postForm").submit();
             return false;
         }
@@ -72,7 +72,7 @@
                         <td><c:out value="${article.title }"></c:out></td>
                         <td><c:out value="${article.date}"></c:out></td>
                         <td>
-                            <a href="<%=context%>/servlet/PostlistServlet?role=3&id=${article.id }">
+                            <a href="<%=context%>/servlet/article?action=getOne&id=${article.id }">
                                 <button type="button" class="btn btn-primary">修改</button>
                             </a>
                         </td>
@@ -83,7 +83,7 @@
                 <div id="News-Pagination" style="float: right"></div>
             </c:if>
             <%--<div class="fiter col-md-4">--%>
-                <%--<form class="form-horizontal form-inline" action="<%=context %>/servlet/PostlistServlet?role=1"--%>
+                <%--<form class="form-horizontal form-inline" action="<%=context %>/servlet/dispatcher?role=1"--%>
                       <%--method="post" id="postForm">--%>
                     <%--<select class="form-control" name="main_id" id="main_id" onchange="getSubCatagory()">--%>
                         <%--<option value="0">一级分类</option>--%>

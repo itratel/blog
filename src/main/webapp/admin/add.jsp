@@ -46,7 +46,7 @@
             </div>
             <div class="main-nav">
                 <ul>
-                    <a href="<%=context %>/servlet/PostlistServlet?role=1">
+                    <a href="<%=context %>/servlet/article?action=page">
                         <li>所有文章</li>
                     </a>
                     <a href="#">

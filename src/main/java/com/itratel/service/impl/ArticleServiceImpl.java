@@ -31,6 +31,16 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     /***
+     * 获取一个文章
+     * @param id id
+     * @return Article
+     */
+    @Override
+    public Article getOneArticle(int id) {
+        return articleDao.getOneArticle(id);
+    }
+
+    /***
      * 插入文章
      * @param article 文章
      * @return boolean

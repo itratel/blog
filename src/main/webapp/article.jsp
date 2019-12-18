@@ -60,10 +60,10 @@
                     </ul>
                 </c:if>
             </c:forEach>
-            <a href="<%=context %>/servlet/PostlistServlet?role=4&main_id=1">
+            <a href="<%=context %>/servlet/dispatcher?role=4&main_id=1">
                 <li>工程</li>
             </a>
-            <a href="<%=context %>/servlet/PostlistServlet?role=1">
+            <a href="<%=context %>/servlet/article?action=page">
                 <li>控制台</li>
             </a>
         </ul>

@@ -45,7 +45,7 @@
             </div>
             <div class="main-nav">
                 <ul>
-                    <a href="<%=context %>/servlet/PostlistServlet?role=1">
+                    <a href="<%=context %>/servlet/article?action=page">
                         <li>所有文章</li>
                     </a>
                     <a href="<%=context %>/admin/add.jsp">
@@ -57,8 +57,7 @@
                 </ul>
             </div>
         </div>
-        <c:forEach items="${result.dataList }" var="article">
-            <form class="form-inline" action="<%=context %>/servlet/PosteditServlet?action=update&id=${article.id}"
+        <form class="form-inline" action="<%=context %>/servlet/article?action=update&id=${article.id}"
                   method="post"
                   onSubmit="return beforeSubmit(this);">
                 <div id="edit" class="col-md-8 col-xs-12">
@@ -91,7 +90,6 @@
                     <button type="submit" class="btn btn-primary" style="float: right;margin:5px;">发布</button>
                 </div>
             </form>
-        </c:forEach>
     </div>
 </div>
 </body>

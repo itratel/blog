@@ -15,6 +15,7 @@ import static com.itratel.constant.Constants.*;
 
 /**
  * <p>登录接口</p>
+ *
  * @author yinhao
  * @date 2019/12/18 00:55
  */
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute(USERNAME, username);
             session.setMaxInactiveInterval(3 * 60);
-            response.sendRedirect("PostlistServlet?role=1");
+            response.sendRedirect("article?" + ACTION + "=" + GET_PAGE);
         } else {
             request.getRequestDispatcher(request.getContextPath() + "/error.jsp").forward(request, response);
         }

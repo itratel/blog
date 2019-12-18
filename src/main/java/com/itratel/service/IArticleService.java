@@ -28,6 +28,14 @@ public interface IArticleService {
 
 
     /***
+     * 获取一个文章
+     * @param id id
+     * @return Article
+     */
+    Article getOneArticle(int id);
+
+
+    /***
      * 修改文章
      * @param article 文章
      * @param id 主键

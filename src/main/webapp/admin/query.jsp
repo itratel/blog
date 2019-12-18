@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>NIC|BLOG</title>
+    <title>殷豪的博客</title>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
     <meta name="description" content="">
@@ -24,7 +24,7 @@
     <script>
 
         function deletePost(id) {
-            if (confirm("确定删除文章？")) {
+            if (confirm("你确定删除文章？")) {
                 $.ajax({
                     type: "POST",
                     async: true,
@@ -45,13 +45,6 @@
             }
         }
 
-        // 点击分页按钮以后触发的动作
-        function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/PostlistServlet?role=1&pageNum=" + (new_page_index + 1));
-            $("#postForm").submit();
-            return false;
-        }
-
         $(function () {
             $("#News-Pagination").pagination(${result.total}, {
                 items_per_page:${result.pageSize}, // 每页显示多少条记录
@@ -60,7 +53,11 @@
                 next_text: "下一页",
                 prev_text: "上一页",
                 num_edge_entries: 2, // 连接分页主体，显示的条目数
-                callback: handlePaginationClick
+                callback: function (new_page_index) {
+                    $("#postForm").attr("action", "<%=context %>/servlet/article?action=page&pageNum=" + (new_page_index + 1));
+                    $("#postForm").submit();
+                    return false;
+                }
             });
         })
     </script>
@@ -85,7 +82,7 @@
             </div>
             <div class="main-nav">
                 <ul>
-                    <a href="#">
+                    <a href="<%=context %>/servlet/article?action=page">
                         <li class="current">所有文章</li>
                     </a>
                     <a href="<%=context %>/admin/add.jsp">
@@ -97,46 +94,47 @@
                 </ul>
             </div>
         </div>
-        <div id="list" class="col-md-10 col-xs-12">
-            <h3>管理</h3>
-            <hr/>
-            <!-- 后台返回结果为空 -->
-            <c:if test="${fn:length(result.dataList) eq 0 }">
-                <span>查询的结果不存在</span>
-            </c:if>
-            <!-- 后台返回结果不为空 -->
-            <c:if test="${fn:length(result.dataList) gt 0 }">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>标题</th>
-                        <th>发表日期</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${result.dataList }" var="article" varStatus="status">
-                    <tr>
-                        <td>${status.index + 1}</td>
-                        <td><c:out value="${article.title }"></c:out></td>
-                        <td><c:out value="${article.date }"></c:out></td>
-                        <td>
-                            <a href="<%=context %>/servlet/PostlistServlet?role=3&id=${article.id }">
-                                <button type="button" class="btn btn-primary">修改</button>
-                            </a>
-                            <button type="button" class="btn btn-danger" onclick="deletePost(${article.id })">删除
-                            </button>
-                        </td>
-                    </tr>
-                    </c:forEach>
-                </table>
-                <br>
-                <div id="News-Pagination" style="float: right"></div>
-            </c:if>
-        </div>
+        <form id="postForm" method="POST">
+            <div id="list" class="col-md-10 col-xs-12">
+                <h3>管理</h3>
+                <hr/>
+                <!-- 后台返回结果为空 -->
+                <c:if test="${fn:length(result.dataList) eq 0 }">
+                    <span>查询的结果不存在</span>
+                </c:if>
+                <!-- 后台返回结果不为空 -->
+                <c:if test="${fn:length(result.dataList) gt 0 }">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>发表日期</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${result.dataList }" var="article" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td><c:out value="${article.title }"></c:out></td>
+                            <td><c:out value="${article.date }"></c:out></td>
+                            <td>
+                                <a href="<%=context %>/servlet/article?action=getOne&id=${article.id }">
+                                    <button type="button" class="btn btn-primary">修改</button>
+                                </a>
+                                <button type="button" class="btn btn-danger" onclick="deletePost(${article.id })">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                    </table>
+                    <br>
+                    <div id="News-Pagination" style="float: right"></div>
+                </c:if>
+            </div>
+        </form>
     </div>
-</div>
 </div>
 </body>
 

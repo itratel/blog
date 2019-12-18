@@ -59,6 +59,25 @@ public class ArticleDao {
         return pageInfo;
     }
 
+    /***
+     * 获取一个文章
+     * @param id id
+     * @return Article
+     */
+    public Article getOneArticle(int id) {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "select id, title, md_content as mdContent, html_content as htmlContent, date from article where id = ?";
+        QueryRunner runner = new QueryRunner();
+        try {
+            return runner.query(conn, sql, new BeanHandler<>(Article.class), id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return null;
+    }
+
     /**
      * 添加新文章
      *
