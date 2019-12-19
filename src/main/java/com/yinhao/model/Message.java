@@ -1,9 +1,8 @@
 package com.yinhao.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import static com.yinhao.constant.Constants.GUEST_ZH;
+import static com.yinhao.util.StrUtil.randomString;
 
 /**
  * <p>留言实体</p>
@@ -15,12 +14,24 @@ public class Message {
      * 主键
      */
     private int id;
+
+    /***
+     * 文章id
+     */
+    private int aId;
+
+    /***
+     * 评论人
+     */
+    private String critics;
+
     /***
      * 具体内容
      */
     private String content;
+
     /***
-     * 日期
+     * 评论日期
      */
     private String date;
 
@@ -30,6 +41,22 @@ public class Message {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getaId() {
+        return aId;
+    }
+
+    public void setaId(int aId) {
+        this.aId = aId;
+    }
+
+    public String getCritics() {
+        return critics;
+    }
+
+    public void setCritics(String critics) {
+        this.critics = critics;
     }
 
     public String getContent() {
@@ -48,25 +75,18 @@ public class Message {
         this.date = date;
     }
 
-
-    public Message(Map<String, Object> map) {
-
-    }
-
-
     @Override
     public String toString() {
         return "Message{" +
                 "id=" + id +
+                ", aId=" + aId +
+                ", critics='" + critics + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
                 '}';
     }
 
-    public List toList() {
-        List<String> list = new ArrayList<>();
-        list.add(content);
-        list.add(date);
-        return list;
+    public static Object[] getParams(Message message) {
+        return new Object[]{message.getaId(), message.getContent(), GUEST_ZH + randomString(8)};
     }
 }

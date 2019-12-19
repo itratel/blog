@@ -26,8 +26,8 @@ public class ArticleServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(UTF8);
+        response.setCharacterEncoding(UTF8);
         //因为servlet是单例的，因此为了线程安全，禁止初始化实例变量
         String action = request.getParameter(ACTION);
         if (StrUtil.isEmpty(action)) {
@@ -106,7 +106,12 @@ public class ArticleServlet extends HttpServlet {
         Article article = articleService.getOneArticle(id);
         String contextPath = request.getContextPath();
         request.setAttribute("article", article);
-        request.getRequestDispatcher(contextPath + "/admin/edit.jsp").forward(request, response);
+        String type = request.getParameter(TYPE);
+        if (StrUtil.isNotEmpty(type) && GUEST.equals(type)){
+            request.getRequestDispatcher(contextPath + "/article.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher(contextPath + "/admin/edit.jsp").forward(request, response);
+        }
     }
 
     /***

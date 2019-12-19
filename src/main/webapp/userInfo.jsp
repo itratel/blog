@@ -44,9 +44,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div id="left-nav" class="col-md-2">
-            <jsp:include page="navigation.jsp"/>
-        </div>
+        <jsp:include page="navigation.jsp"/>
         <div id="wrap">
             <div class="container main-inner">
                 <form id="postForm" class="form-horizontal" role="form">

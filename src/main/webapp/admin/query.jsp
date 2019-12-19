@@ -9,8 +9,7 @@
     <title>殷豪的博客</title>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
     <link rel="stylesheet" href="../css/manage.css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/pagination.css">
@@ -28,6 +27,7 @@
                 $.ajax({
                     type: "POST",
                     async: true,
+                    dataType: "text",
                     url: "<%=context %>/servlet/article",
                     data: {
                         "action": "delete",
@@ -39,9 +39,8 @@
                     },
                     error: function () {
                         alert("请求失败");
-                    },
-                    dataType: "text"
-                })
+                    }
+                });
             }
         }
 
@@ -118,7 +117,7 @@
                         <tr>
                             <td><c:out value="${result.pageSize * (result.curPage - 1) + loop.count}"/></td>
                             <td><c:out value="${article.title }"/></td>
-                            <td><c:out value="${article.date }"/></td>
+                            <td><c:out value="${fn:substring(article.date,0,19)}"/></td>
                             <td>
                                 <a href="<%=context %>/servlet/article?action=getOne&id=${article.id }">
                                     <button type="button" class="btn btn-primary">修改</button>

@@ -12,6 +12,7 @@
     %>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
     <link rel="stylesheet" href="../css/manage.css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -51,7 +52,7 @@
                     <a href="<%=context %>/admin/add.jsp">
                         <li class="current">写文章</li>
                     </a>
-                    <a href="<%=context %>/index.jsp">
+                    <a href="<%=context %>/servlet/article?action=top3">
                         <li>返回首页</li>
                     </a>
                 </ul>

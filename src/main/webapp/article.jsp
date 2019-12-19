@@ -21,53 +21,110 @@
     <script src="<%=context %>/js/blog.js"></script>
     <script src="<%=context %>/js/bootstrap.min.js"></script>
     <script src="<%=context %>/js/prism.js"></script>
-    <script>
+    <script type="application/javascript">
+
+        /***
+         * dom结构后加载评论
+         **/
         $(function () {
-            $("#News-Pagination").pagination(${result.total}, {
-                items_per_page:${result.pageSize}, // 每页显示多少条记录
-                current_page: ${result.curPage} -1, // 当前显示第几页数据
-                num_display_entries: 3, // 分页显示的条目数
-                next_text: "下一页",
-                prev_text: "上一页",
-                num_edge_entries: 2, // 连接分页主体，显示的条目数
-                callback: function (new_page_index) {
-                    $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
-                    $("#postForm").submit();
-                    return false;
+            var aId = $('#articleId').val() || ${article.id};
+            loadComments(aId);
+        });
+
+        function loadComments(aId) {
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "<%=context %>/servlet/message",
+                dataType: "text",
+                data: {
+                    "action": "page",
+                    "aId": aId
+                },
+                success: function (data) {
+                    var content = data.dataList;
+                    console.log(content);
+                    if (content) {
+                        alert(content);
+                        renderMsg(content);
+                    }
+                },
+                error: function () {
+                    alert("请求失败");
                 }
             });
-        })
+        }
+
+        function renderMsg(data) {
+            debugger
+            var html = '';
+            html +='<ul>';
+            for (var i = 0; i < data.length; i++) {
+                html +='<li>'+data[i].content+'</li>';
+            }
+            html +='</ul>';
+            $('#show-comments').html(html);
+        }
+
+        /***
+         * 增加评论
+         */
+        function addMsg() {
+            var aId = $('#articleId').val();
+            var content = $('#comment').val();
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "<%=context %>/servlet/message",
+                dataType: "text",
+                data: {
+                    "action": "add",
+                    "aId": aId,
+                    "content": content
+                },
+                success: function (data) {
+                    alert(data);
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("请求失败");
+                }
+            });
+        }
     </script>
 </head>
 <body>
-<div id="bar" class="scrollbar"></div>
-<div id="gotop"></div>
-<div id="switch">
-    <div id="iconfixed">
-        <div class="icon"></div>
-    </div>
-</div>
-<div id="left-nav">
-    <jsp:include page="navigation.jsp"/>
-</div>
-<div id="wrap">
-    <div id="main">
-        <div class="container main-inner">
-            <div class="row">
-                <c:forEach items="${result.dataList }" var="article">
-                    <div class="col-md-8 col-md-offset-2 col-xs-12">
-                        <div class="single-title"><h2>${article.title }</h2></div>
-                        <div class="single-info">
-                            发表于${fn:substring(article.date,0,10)}</div>
-                        <div class="single-content">${article.htmlContent }</div>
-                        <br>
+<div class="container-fluid">
+    <div class="row">
+        <jsp:include page="navigation.jsp"/>
+        <div id="wrap">
+            <div id="main">
+                <div class="container main-inner">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-xs-12">
+                            <input id="articleId" type="hidden" value="${article.id}">
+                            <div class="single-title"><h2>${article.title}</h2></div>
+                            <div class="single-info">
+                                殷豪发表于${fn:substring(article.date,0,10)}</div>
+                            <div class="single-content">${article.htmlContent}</div>
+                            <br>
+                            <form>
+                                <div id="show-comments" class="form-group" style="border: #0a001f">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">评论这篇文章:</label>
+                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <input id="addComment" type="button" class="btn btn-sm btn-primary" style="float: right;" value="提交" onclick="addMsg()"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </c:forEach>
-                <div id="News-Pagination"></div>
+                </div>
             </div>
+            <jsp:include page="footer.jsp"/>
         </div>
     </div>
-    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 </html>

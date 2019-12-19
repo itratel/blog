@@ -45,9 +45,7 @@
         background-size: cover;">
 <div class="container-fluid" >
     <div class="row">
-        <div id="left-nav" class="col-md-2">
-            <jsp:include page="navigation.jsp"/>
-        </div>
+        <jsp:include page="navigation.jsp"/>
         <div id="wrap">
             <div class="bg-title">
                 201817020015 殷豪的博客
@@ -62,7 +60,7 @@
                                     <article class="index-article">
                                         <div class="post-info">
                                             <h2>
-                                                <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${status.index + 1}.${article.title }</a>
+                                                <a href="<%=context %>/servlet/article?action=getOne&type=guest&id=${article.id}">${status.index + 1}.${article.title }</a>
                                             </h2>
                                             <div class="post-detial">
                                                 <span>${article.title}</span>

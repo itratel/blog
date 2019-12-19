@@ -28,13 +28,18 @@ public class Constants {
     public static final String TITLE = "title";
     public static final String UTF8 = "UTF-8";
     public static final String JPG = "JPG";
-    public static final String ROLE = "role";
     public static final String PAGE_NUM = "pageNum";
     public static final String PAGE_SIZE = "pageSize";
     public static final String TYPE = "type";
     public static final String RESULT = "result";
     public static final String CUSTOM = "custom";
+    public static final String GUEST = "guest";
+    public static final String GUEST_ZH = "游客";
     public static final String USER = "user";
+    public static final String ARTICLE_ID = "aId";
+    public static final String CONTENT = "content";
+    public static final String SUCCESS = "success";
+    public static final String FAIL = "fail";
 
     public static final int MIN_PAGE_SIZE = 1;
     public static final int MAX_PAGE_SIZE = 5;
