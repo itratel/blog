@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>BLOG</title>
+    <title>殷豪的博客</title>
     <%
         String context = request.getContextPath();
     %>
@@ -42,45 +42,44 @@
 </head>
 
 <body>
-<div id="switch">
-    <div id="iconfixed">
-        <div class="icon"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="left-nav" class="col-md-2">
+            <jsp:include page="navigation.jsp"/>
+        </div>
+        <div id="wrap">
+            <div class="container main-inner">
+                <form id="postForm" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="img" class="control-label col-sm-1">个人头像</label>
+                        <img id="img" class="col-sm-4" src="<%=context%>${user.imgUrl}"
+                             alt="用户头像" width="320px" height="320px">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label">用户名</label>
+                        <input type="text" class="form-control" id="name" value="${user.username}"
+                               disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="sex" class="control-label">性别</label>
+                        <input type="text" class="form-control" id="sex" value="${user.sex}"
+                               disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">邮箱</label>
+                        <input type="text" class="form-control" id="email" value="${user.email}"
+                               disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="hobby" class="control-label">爱好</label>
+                        <input type="text" class="form-control" id="hobby" value="${user.hobby}"
+                               disabled="disabled">
+                    </div>
+                </form>
+            </div>
+            <jsp:include page="footer.jsp"/>
+        </div>
     </div>
-</div>
-<div id="left-nav">
-    <jsp:include page="navigation.jsp"/>
-</div>
-<div id="wrap">
-    <div class="container main-inner">
-        <form id="postForm" class="form-horizontal" role="form">
-            <div class="form-group">
-                <label for="img" class="control-label col-sm-1">个人头像</label>
-                <img id="img" class="col-sm-4" src="<%=context%>${user.imgUrl}"
-                     alt="用户头像" width="320px" height="320px">
-            </div>
-            <div class="form-group">
-                <label for="name" class="control-label">用户名</label>
-                <input type="text" class="form-control" id="name" value="${user.username}"
-                            disabled="disabled">
-            </div>
-            <div class="form-group">
-                <label for="sex" class="control-label">性别</label>
-                <input type="text" class="form-control" id="sex" value="${user.sex}"
-                           disabled="disabled">
-            </div>
-            <div class="form-group">
-                <label for="email" class="control-label">邮箱</label>
-                <input type="text" class="form-control" id="email" value="${user.email}"
-                           disabled="disabled">
-            </div>
-            <div class="form-group">
-                <label for="hobby" class="control-label">爱好</label>
-                <input type="text" class="form-control" id="hobby" value="${user.hobby}"
-                       disabled="disabled">
-            </div>
-        </form>
-    </div>
-    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 

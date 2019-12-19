@@ -84,8 +84,14 @@ public class ArticleServlet extends HttpServlet {
         //调用service 获取查询结果
         PageInfo<Article> result = articleService.listArticle(pageNum, pageSize);
         // 返回结果到页面
-        request.setAttribute("result", result);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/query.jsp").forward(request, response);
+        request.setAttribute(RESULT, result);
+        String type = request.getParameter(TYPE);
+        String contextPath = request.getContextPath();
+        if (StrUtil.isNotEmpty(type) && CUSTOM.equals(type)) {
+            request.getRequestDispatcher(contextPath + "/list.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher(contextPath + "/admin/query.jsp").forward(request, response);
+        }
     }
 
     /***

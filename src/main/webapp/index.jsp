@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>BLOG</title>
+    <title>殷豪的博客</title>
     <%
         String context = request.getContextPath();
     %>
@@ -39,78 +39,51 @@
             text-decoration: none;
         }
     </style>
-    <%--<script>--%>
-        <%--// 点击分页按钮以后触发的动作--%>
-        <%--function handlePaginationClick(new_page_index, pagination_container) {--%>
-            <%--$("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));--%>
-            <%--$("#postForm").submit();--%>
-            <%--return false;--%>
-        <%--}--%>
-
-        <%--$(function () {--%>
-            <%--$("#News-Pagination").pagination(${result.total}, {--%>
-                <%--items_per_page:${result.pageSize}, // 每页显示多少条记录--%>
-                <%--current_page: ${result.curPage} -1, // 当前显示第几页数据--%>
-                <%--num_display_entries: 3, // 分页显示的条目数--%>
-                <%--next_text: "下一页",--%>
-                <%--prev_text: "上一页",--%>
-                <%--num_edge_entries: 2, // 连接分页主体，显示的条目数--%>
-                <%--callback: handlePaginationClick--%>
-            <%--});--%>
-        <%--})--%>
-    <%--</script>--%>
 </head>
 
 <body style="background: #e2e2e2 url(<%=context %>/img/home.jpg) no-repeat fixed center;
         background-size: cover;">
-<div id="bar" class="scrollbar"></div>
-<div id="gotop"></div>
-<div id="switch">
-    <div id="iconfixed">
-        <div class="icon"></div>
-    </div>
-</div>
-<div id="left-nav">
-    <jsp:include page="navigation.jsp"/>
-</div>
-<div id="wrap">
-    <%--<div id="top">--%>
-        <%--<div class="info">--%>
+<div class="container-fluid" >
+    <div class="row">
+        <div id="left-nav" class="col-md-2">
+            <jsp:include page="navigation.jsp"/>
+        </div>
+        <div id="wrap">
             <div class="bg-title">
                 201817020015 殷豪的博客
             </div>
-        <%--</div>--%>
-    <%--</div>--%>
-    <div id="main">
-        <form id="postForm" method="POST">
-            <div class="container main-inner">
-                <div class="row">
-                    <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
-                        <c:forEach items="${list}" var="article">
-                            <article class="index-article">
-                                <div class="post-info">
-                                    <h2>
-                                        <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
-                                    </h2>
-                                    <div class="post-detial">
-                                        <span>${article.title}</span>
-                                        <span>${fn:substring(article.date,0,10)}</span>
-                                    </div>
-                                </div>
-                            </article>
-                        </c:forEach>
-                        <center>
-                            <button class="more"><a
-                                    href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}"
-                                    style="color: #000000;">Read More</a></button>
-                        </center>
-                        <%--<div id="News-Pagination"></div>--%>
+
+            <div id="main">
+                <form id="postForm" method="POST">
+                    <div class="container main-inner">
+                        <div class="row">
+                            <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
+                                <c:forEach items="${list}" var="article">
+                                    <article class="index-article">
+                                        <div class="post-info">
+                                            <h2>
+                                                <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
+                                            </h2>
+                                            <div class="post-detial">
+                                                <span>${article.title}</span>
+                                                <span>殷豪发表于${fn:substring(article.date,0,19)}</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </c:forEach>
+                                <center>
+                                    <button class="more"><a
+                                            href="<%=context %>/servlet/article?action=page&type=custom"
+                                            style="color: #000000;">Read More</a></button>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+            <jsp:include page="footer.jsp"/>
+        </div>
     </div>
-    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 

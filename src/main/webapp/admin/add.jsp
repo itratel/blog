@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>NIC|BLOG</title>
+    <title>殷豪的博客</title>
     <%
         String context = request.getContextPath();
     %>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.yinhao.constant.Constants.USER;
 import static com.yinhao.constant.Constants.UTF8;
 
 /**
@@ -28,7 +29,7 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding(UTF8);
         IUserService userService = new UserServiceImpl();
         User user = userService.getUser();
-        request.setAttribute("user", user);
+        request.getSession().setAttribute(USER, user);
         request.getRequestDispatcher(request.getContextPath() + "/userInfo.jsp").forward(request, response);
     }
 

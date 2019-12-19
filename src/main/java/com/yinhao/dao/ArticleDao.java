@@ -27,7 +27,7 @@ public class ArticleDao {
      */
     public List<Article> listTop3Article() {
         Connection conn = JdbcUtil.getConnection();
-        String sql = "select id, title, md_content as mdContent, html_content as htmlContent, date from article limit ?";
+        String sql = "select id, title, md_content as mdContent, html_content as htmlContent, date from article order by date desc limit ?";
         QueryRunner runner = new QueryRunner();
         try {
             List<Article> top3List = runner.query(conn, sql, new BeanListHandler<>(Article.class), 3);
@@ -54,7 +54,7 @@ public class ArticleDao {
         // 起始索引
         int fromIndex = pageSize * (pageNum - 1);
         // 使用limit关键字，实现分页
-        sql.append(" limit ").append(fromIndex).append(", ").append(pageSize);
+        sql.append(" order by date desc limit ").append(fromIndex).append(", ").append(pageSize);
         // 存放所有查询出的文章对象
         List<Article> list;
         Connection conn = JdbcUtil.getConnection();

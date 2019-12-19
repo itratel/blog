@@ -70,10 +70,9 @@ html {
 
 #left-nav {
     background: #fafafa;
-    width: 280px;
-    height: 100%;
+    height: 100vh;
     position: fixed;
-    left: -280px;
+    /*left: -280px;*/
     top: 0;
     bottom: 0;
     transition: transform .5s ease;
@@ -103,6 +102,11 @@ html {
 }
 
 .main-nav a:hover {
+    text-decoration: none;
+    color: #504E4E;
+    background-color: #eee;
+}
+.main-nav a .current{
     text-decoration: none;
     color: #504E4E;
     background-color: #eee;
@@ -164,10 +168,6 @@ html {
     background-color: transparent;
 }
 
-#wrap {
-    position: relative;
-    transition: transform .5s ease;
-}
 
 #main {
     background-color: rgba(255, 255, 255, 0.6);
@@ -184,7 +184,7 @@ html {
 .bg-title {
     color: #fff;
     font-size: 60px;
-    margin: 30px 10px 60px 200px;
+    margin: 30px 10px 60px 620px;
 }
 
 .md-title {

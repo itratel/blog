@@ -16,7 +16,6 @@ public class Constants {
     public static final String GET_ONE = "getOne";
     public static final String GET_PAGE = "page";
     public static final String TOP_THREE = "top3";
-    public static final String GET_ALL = "getAll";
     public static final String AUTHOR = "yinhao";
 
     public static final String ID = "id";
@@ -32,6 +31,10 @@ public class Constants {
     public static final String ROLE = "role";
     public static final String PAGE_NUM = "pageNum";
     public static final String PAGE_SIZE = "pageSize";
+    public static final String TYPE = "type";
+    public static final String RESULT = "result";
+    public static final String CUSTOM = "custom";
+    public static final String USER = "user";
 
     public static final int MIN_PAGE_SIZE = 1;
     public static final int MAX_PAGE_SIZE = 5;

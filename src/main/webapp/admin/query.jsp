@@ -88,7 +88,7 @@
                     <a href="<%=context %>/admin/add.jsp">
                         <li>写文章</li>
                     </a>
-                    <a href="<%=context %>/index.jsp">
+                    <a href="<%=context %>/servlet/article?action=top3">
                         <li>返回首页</li>
                     </a>
                 </ul>
@@ -114,11 +114,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${result.dataList }" var="article" varStatus="status">
+                        <c:forEach items="${result.dataList }" var="article" varStatus="loop">
                         <tr>
-                            <td>${status.index + 1}</td>
-                            <td><c:out value="${article.title }"></c:out></td>
-                            <td><c:out value="${article.date }"></c:out></td>
+                            <td><c:out value="${result.pageSize * (result.curPage - 1) + loop.count}"/></td>
+                            <td><c:out value="${article.title }"/></td>
+                            <td><c:out value="${article.date }"/></td>
                             <td>
                                 <a href="<%=context %>/servlet/article?action=getOne&id=${article.id }">
                                     <button type="button" class="btn btn-primary">修改</button>

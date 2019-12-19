@@ -15,7 +15,7 @@
         <a href="<%=context %>/servlet/article?action=top3">
             <li>博客首页</li>
         </a>
-        <a href="<%=context %>/list.jsp">
+        <a href="<%=context %>/servlet/article?action=page&type=custom">
             <li>博客列表</li>
         </a>
         <a href="<%=context %>/servlet/user">

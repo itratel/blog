@@ -5,11 +5,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>NIC|BLOG</title>
+    <title>殷豪的博客</title>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
     <link rel="stylesheet" href="../css/manage.css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/pagination.css">
@@ -20,13 +21,24 @@
     <%
         String context = request.getContextPath();
     %>
-    <script>
-        // 点击分页按钮以后触发的动作
-        function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/article?action=page&pageNum=" + (new_page_index + 1));
-            $("#postForm").submit();
-            return false;
+    <style type="text/css">
+        a:link {
+            text-decoration: none;
         }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+    <script>
         $(function () {
             $("#News-Pagination").pagination(${result.total}, {
                 items_per_page:${result.pageSize}, // 每页显示多少条记录
@@ -35,7 +47,11 @@
                 next_text: "下一页",
                 prev_text: "上一页",
                 num_edge_entries: 2, // 连接分页主体，显示的条目数
-                callback: handlePaginationClick
+                callback: function (new_page_index) {
+                    $("#postForm").attr("action", "<%=context %>/servlet/article?action=page&type=custom&pageNum=" + (new_page_index + 1));
+                    $("#postForm").submit();
+                    return false;
+                }
             });
         })
     </script>
@@ -47,39 +63,41 @@
         <div id="left-nav" class="col-md-2">
             <jsp:include page="navigation.jsp"/>
         </div>
-        <div id="list" class="col-md-10 col-xs-12">
-            <h3>管理</h3>
-            <hr/>
-            <!-- 后台返回结果为空 -->
-            <c:if test="${fn:length(result.dataList) eq 0 }">
-                <span>查询的结果不存在</span>
-            </c:if>
-            <!-- 后台返回结果不为空 -->
-            <c:if test="${fn:length(result.dataList) gt 0 }">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>标题</th>
-                        <th>发表日期</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${result.dataList }" var="article" varStatus="status">
-                    <tr>
-                        <td>${status.index + 1}</td>
-                        <td><c:out value="${article.title }"></c:out></td>
-                        <td><c:out value="${article.date}"></c:out></td>
-                    </tr>
-                    </c:forEach>
-                </table>
-                <br>
-                <div id="News-Pagination" style="float: right"></div>
-            </c:if>
+        <div id="wrap">
+            <div id="main">
+                <form id="postForm" method="POST">
+                    <div class="container main-inner">
+                        <div class="jumbotron">
+                            <h1>欢迎访问殷豪的个人博客</h1>
+                            <p>这是一个博主本人自己的一些平时学习经验和大家交流的地方，欢迎大家参与评论！</p>
+<%--                            <p><a class="btn btn-primary btn-lg" role="button">--%>
+<%--                                学习更多</a>--%>
+<%--                            </p>--%>
+                        </div>
+                        <div class="row">
+                            <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
+                                <c:forEach items="${result.dataList}" var="article" varStatus="loop">
+                                    <article class="index-article">
+                                        <div class="post-info">
+                                            <h2>
+                                                <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${result.pageSize * (result.curPage - 1) + loop.count}.${article.title }</a>
+                                            </h2>
+                                            <div class="post-detial">
+                                                <span>${article.title}</span>
+                                                <span>发表于${fn:substring(article.date,0,19)}</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </c:forEach>
+                                <div id="News-Pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <jsp:include page="footer.jsp"/>
         </div>
     </div>
-</div>
 </div>
 </body>
 

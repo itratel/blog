@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>BLOG</title>
+    <title>殷豪的博客</title>
     <%
         String context = request.getContextPath();
     %>
@@ -77,10 +77,7 @@
     <div id="top">
         <div class="info">
             <div class="bg-title">
-                殷豪 Blog
-            </div>
-            <div class="md-title">
-                DEBUG THE WORLD
+                201817020015 殷豪的博客
             </div>
         </div>
     </div>
@@ -97,10 +94,9 @@
                                     </h2>
                                     <div class="post-detial">
                                         <span>${article.title}</span>
-                                        <span>${fn:substring(article.date,0,10)}</span>
+                                        <span>${fn:substring(article.date,0,19)}</span>
                                     </div>
                                 </div>
-                                <p>${article.subtitle }</p>
                                 <center>
                                     <button class="more"><a
                                             href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}"

@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -22,13 +22,6 @@
     <script src="<%=context %>/js/bootstrap.min.js"></script>
     <script src="<%=context %>/js/prism.js"></script>
     <script>
-        // 点击分页按钮以后触发的动作
-        function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
-            $("#postForm").submit();
-            return false;
-        }
-
         $(function () {
             $("#News-Pagination").pagination(${result.total}, {
                 items_per_page:${result.pageSize}, // 每页显示多少条记录
@@ -37,7 +30,11 @@
                 next_text: "下一页",
                 prev_text: "上一页",
                 num_edge_entries: 2, // 连接分页主体，显示的条目数
-                callback: handlePaginationClick
+                callback: function (new_page_index) {
+                    $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
+                    $("#postForm").submit();
+                    return false;
+                }
             });
         })
     </script>
