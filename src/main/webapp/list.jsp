@@ -84,7 +84,7 @@
                                             </h2>
                                             <div class="post-detial">
                                                 <span>${article.title}</span>
-                                                <span>发表于${fn:substring(article.date,0,19)}</span>
+                                                <span>殷豪发表于${fn:substring(article.date,0,19)}</span>
                                             </div>
                                         </div>
                                     </article>

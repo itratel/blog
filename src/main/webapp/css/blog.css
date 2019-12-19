@@ -219,10 +219,6 @@ html {
     transition: all .5s ease;
 }
 
-.post-info {
-    text-align: center;
-}
-
 .post-info h2 a {
     text-decoration: none;
     color: #000000;
@@ -269,7 +265,7 @@ html {
 footer {
     padding: 15px 0;
     text-align: center;
-    color: #999;
+    color: #0a001f;;
     font-size: 13px;
     border-top: 1px solid #eee;
 }
@@ -278,7 +274,8 @@ footer span {
     line-height: 2;
 }
 
-footer div#block {
+#block {
+    text-align: center;
     display: block;
 }
 

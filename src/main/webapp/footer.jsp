@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <body>
 <style type="text/css">
-    footer {
-       font-size: 10px;
-        color: #0a001f;
+    #block {
+        text-align: center;
     }
 </style>
 <footer>
     <div id="block">
         <span id="beian">本网站由作者殷豪制作</span>
-        <span id="demo"></span>
+        <span id="demo">xxxx大学</span>
+        <span>Copyright © 殷豪</span>
     </div>
-    Copyright © 殷豪 <span></span>
 </footer>
 </body>
 </html>

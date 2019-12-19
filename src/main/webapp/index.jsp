@@ -58,11 +58,11 @@
                     <div class="container main-inner">
                         <div class="row">
                             <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
-                                <c:forEach items="${list}" var="article">
+                                <c:forEach items="${list}" var="article" varStatus="status">
                                     <article class="index-article">
                                         <div class="post-info">
                                             <h2>
-                                                <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
+                                                <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${status.index + 1}.${article.title }</a>
                                             </h2>
                                             <div class="post-detial">
                                                 <span>${article.title}</span>
