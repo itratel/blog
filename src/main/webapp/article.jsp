@@ -36,7 +36,7 @@
                 type: "POST",
                 async: true,
                 url: "<%=context %>/servlet/message",
-                dataType: "text",
+                dataType: "json",
                 data: {
                     "action": "page",
                     "aId": aId
@@ -45,7 +45,6 @@
                     var content = data.dataList;
                     console.log(content);
                     if (content) {
-                        alert(content);
                         renderMsg(content);
                     }
                 },
@@ -56,7 +55,6 @@
         }
 
         function renderMsg(data) {
-            debugger
             var html = '';
             html +='<ul>';
             for (var i = 0; i < data.length; i++) {
