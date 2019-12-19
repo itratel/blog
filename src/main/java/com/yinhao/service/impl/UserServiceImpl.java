@@ -1,8 +1,8 @@
-package com.itratel.service.impl;
+package com.yinhao.service.impl;
 
-import com.itratel.dao.UserDao;
-import com.itratel.model.User;
-import com.itratel.service.IUserService;
+import com.yinhao.dao.UserDao;
+import com.yinhao.model.User;
+import com.yinhao.service.IUserService;
 
 /**
  * <p>用户业务层</p>

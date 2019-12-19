@@ -1,4 +1,4 @@
-package com.itratel.model;
+package com.yinhao.model;
 
 /**
  * <p>文章实体</p>

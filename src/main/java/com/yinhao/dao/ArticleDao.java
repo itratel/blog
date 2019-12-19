@@ -1,9 +1,9 @@
-package com.itratel.dao;
+package com.yinhao.dao;
 
-import com.itratel.model.Article;
-import com.itratel.model.PageInfo;
-import com.itratel.util.JdbcUtil;
-import com.itratel.util.OptionalUtil;
+import com.yinhao.model.Article;
+import com.yinhao.model.PageInfo;
+import com.yinhao.util.JdbcUtil;
+import com.yinhao.util.OptionalUtil;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

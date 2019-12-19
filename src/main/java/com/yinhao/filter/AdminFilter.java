@@ -1,4 +1,4 @@
-package com.itratel.filter;
+package com.yinhao.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

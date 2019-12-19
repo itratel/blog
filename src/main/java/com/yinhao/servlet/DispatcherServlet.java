@@ -1,10 +1,10 @@
-package com.itratel.servlet;
+package com.yinhao.servlet;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
-import static com.itratel.constant.Constants.*;
+import static com.yinhao.constant.Constants.*;
 
 /**
  * <p>转发控制层</p>

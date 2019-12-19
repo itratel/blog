@@ -1,4 +1,4 @@
-package com.itratel.servlet;
+package com.yinhao.servlet;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -11,9 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-import static com.itratel.constant.Constants.JPG;
-import static com.itratel.constant.Constants.VERIFY_CODE;
-import static com.itratel.util.StrUtil.wrapperInt;
+import static com.yinhao.constant.Constants.JPG;
+import static com.yinhao.constant.Constants.VERIFY_CODE;
+import static com.yinhao.util.StrUtil.wrapperInt;
 
 /**
  * <p>验证码图片控制层</p>

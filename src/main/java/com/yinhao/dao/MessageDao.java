@@ -1,7 +1,7 @@
-package com.itratel.dao;
+package com.yinhao.dao;
 
-import com.itratel.model.Message;
-import com.itratel.model.PageInfo;
+import com.yinhao.model.Message;
+import com.yinhao.model.PageInfo;
 
 /**
  * <p>留言数据访问层</p>

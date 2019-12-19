@@ -1,4 +1,4 @@
-package com.itratel.util;
+package com.yinhao.util;
 
 import java.io.InputStream;
 import java.sql.*;

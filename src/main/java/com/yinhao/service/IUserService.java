@@ -1,6 +1,6 @@
-package com.itratel.service;
+package com.yinhao.service;
 
-import com.itratel.model.User;
+import com.yinhao.model.User;
 
 /**
  * <p>文章业务层接口</p>

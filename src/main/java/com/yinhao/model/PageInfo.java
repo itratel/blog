@@ -1,4 +1,4 @@
-package com.itratel.model;
+package com.yinhao.model;
 
 import java.util.List;
 

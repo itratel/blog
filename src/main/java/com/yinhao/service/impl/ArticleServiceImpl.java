@@ -1,9 +1,9 @@
-package com.itratel.service.impl;
+package com.yinhao.service.impl;
 
-import com.itratel.dao.ArticleDao;
-import com.itratel.model.Article;
-import com.itratel.model.PageInfo;
-import com.itratel.service.IArticleService;
+import com.yinhao.dao.ArticleDao;
+import com.yinhao.model.Article;
+import com.yinhao.model.PageInfo;
+import com.yinhao.service.IArticleService;
 
 import java.util.List;
 

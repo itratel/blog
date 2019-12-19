@@ -1,7 +1,7 @@
-package com.itratel.service;
+package com.yinhao.service;
 
-import com.itratel.model.Article;
-import com.itratel.model.PageInfo;
+import com.yinhao.model.Article;
+import com.yinhao.model.PageInfo;
 
 import java.util.List;
 

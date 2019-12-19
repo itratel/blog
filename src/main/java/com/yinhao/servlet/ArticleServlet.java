@@ -1,10 +1,10 @@
-package com.itratel.servlet;
+package com.yinhao.servlet;
 
-import com.itratel.model.Article;
-import com.itratel.model.PageInfo;
-import com.itratel.service.IArticleService;
-import com.itratel.service.impl.ArticleServiceImpl;
-import com.itratel.util.StrUtil;
+import com.yinhao.model.Article;
+import com.yinhao.model.PageInfo;
+import com.yinhao.service.IArticleService;
+import com.yinhao.service.impl.ArticleServiceImpl;
+import com.yinhao.util.StrUtil;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.itratel.constant.Constants.*;
+import static com.yinhao.constant.Constants.*;
 
 /**
  * <p>文章控制层</p>

@@ -1,7 +1,7 @@
-package com.itratel.servlet;
+package com.yinhao.servlet;
 
-import com.itratel.service.IUserService;
-import com.itratel.service.impl.UserServiceImpl;
+import com.yinhao.service.IUserService;
+import com.yinhao.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.itratel.constant.Constants.*;
+import static com.yinhao.constant.Constants.*;
 
 /**
  * <p>登录接口</p>

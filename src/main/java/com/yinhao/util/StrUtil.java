@@ -1,4 +1,4 @@
-package com.itratel.util;
+package com.yinhao.util;
 
 /**
  * <p>StrUtil字符串工具类</p>

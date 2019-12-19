@@ -1,4 +1,4 @@
-package com.itratel.constant;
+package com.yinhao.constant;
 
 /**
  * <p>Constants</p>

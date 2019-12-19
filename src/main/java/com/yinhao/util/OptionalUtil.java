@@ -1,4 +1,4 @@
-package com.itratel.util;
+package com.yinhao.util;
 
 import java.util.Collections;
 import java.util.List;

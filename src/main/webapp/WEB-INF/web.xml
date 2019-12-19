@@ -6,7 +6,7 @@
 
     <filter>
         <filter-name>AdminFilter</filter-name>
-        <filter-class>com.itratel.filter.AdminFilter</filter-class>
+        <filter-class>com.yinhao.filter.AdminFilter</filter-class>
         <init-param>  <!--为过滤器指定初始化参数  -->
             <param-name>noFilterPaths</param-name>
             <param-value>index.html;login.html;success.jsp;error.jsp;blog.jsp;article.jsp;project.jsp;

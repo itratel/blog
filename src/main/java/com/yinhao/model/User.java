@@ -1,4 +1,4 @@
-package com.itratel.model;
+package com.yinhao.model;
 
 /**
  * <p>用户实体</p>
