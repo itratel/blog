@@ -3,10 +3,10 @@
 <body>
 <footer>
     <div id="block">
-        <span id="beian">xxxxxxxxxx</span>
+        <span id="beian">本网站由作者殷豪制作</span>
         <span id="demo"></span>
     </div>
-    Copyright © yinhao <span></span>
+    Copyright © 殷豪 <span></span>
 </footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <head>
     <title>success</title>
@@ -18,7 +18,7 @@
         <a href="<%=context %>/list.jsp">
             <li>博客列表</li>
         </a>
-        <a href="<%=context %>/userInfo.jsp">
+        <a href="<%=context %>/servlet/user">
             <li>个人档案</li>
         </a>
         <a href="<%=context %>/message.jsp">

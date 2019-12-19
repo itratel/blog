@@ -39,32 +39,9 @@
             text-decoration: none;
         }
     </style>
-    <script>
-        // 点击分页按钮以后触发的动作
-        function handlePaginationClick(new_page_index, pagination_container) {
-            $("#postForm").attr("action", "<%=context %>/servlet/dispatcher?role=0&pageNum=" + (new_page_index + 1));
-            $("#postForm").submit();
-            return false;
-        }
-
-        $(function () {
-            $("#News-Pagination").pagination(${result.total}, {
-                items_per_page:${result.pageSize}, // 每页显示多少条记录
-                current_page: ${result.curPage} -1, // 当前显示第几页数据
-                num_display_entries: 3, // 分页显示的条目数
-                next_text: "下一页",
-                prev_text: "上一页",
-                num_edge_entries: 2, // 连接分页主体，显示的条目数
-                callback: handlePaginationClick
-            });
-        })
-    </script>
 </head>
 
-<body style="background: #e2e2e2 url(<%=context %>/img/home.jpg) no-repeat fixed center;
-        background-size: cover;">
-<div id="bar" class="scrollbar"></div>
-<div id="gotop"></div>
+<body>
 <div id="switch">
     <div id="iconfixed">
         <div class="icon"></div>
@@ -74,53 +51,36 @@
     <jsp:include page="navigation.jsp"/>
 </div>
 <div id="wrap">
-    <div id="top">
-        <div class="info">
-            <div class="bg-title">
-                201817020015 殷豪的个人博客
+    <div class="container main-inner">
+        <form id="postForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="img" class="control-label col-sm-1">个人头像</label>
+                <img id="img" class="col-sm-4" src="<%=context%>${user.imgUrl}"
+                     alt="用户头像" width="320px" height="320px">
             </div>
-            <div class="md-title">
-                DEBUG THE WORLD
+            <div class="form-group">
+                <label for="name" class="control-label">用户名</label>
+                <input type="text" class="form-control" id="name" value="${user.username}"
+                            disabled="disabled">
             </div>
-        </div>
-    </div>
-    <div id="main">
-        <form id="postForm" method="POST" action="<%=context %>/servlet/dispatcher">
-            <div class="container main-inner">
-                <div class="row">
-                    <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
-                        <c:forEach items="${result.dataList }" var="article">
-                            <article class="index-article">
-                                <div class="post-info">
-                                    <h2>
-                                        <a href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}">${article.title }</a>
-                                    </h2>
-                                    <div class="post-detial">
-                                        <span>${article.mdContent}</span>
-                                        <span>${fn:substring(article.date,0,10)}</span>
-                                    </div>
-                                </div>
-                                <p>${article.subtitle }</p>
-                                <center>
-                                    <button class="more"><a
-                                            href="<%=context %>/servlet/dispatcher?role=2&id=${article.id}"
-                                            style="color: #000;">Read More</a></button>
-                                </center>
-                            </article>
-                        </c:forEach>
-                        <div id="News-Pagination"></div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="sex" class="control-label">性别</label>
+                <input type="text" class="form-control" id="sex" value="${user.sex}"
+                           disabled="disabled">
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label">邮箱</label>
+                <input type="text" class="form-control" id="email" value="${user.email}"
+                           disabled="disabled">
+            </div>
+            <div class="form-group">
+                <label for="hobby" class="control-label">爱好</label>
+                <input type="text" class="form-control" id="hobby" value="${user.hobby}"
+                       disabled="disabled">
             </div>
         </form>
     </div>
-    <footer>
-        <div id="block">
-            <span id="beian">xxxxxxxxxx</span>
-            <span id="demo"></span>
-        </div>
-        Copyright © itratel <span></span>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </div>
 </body>
 

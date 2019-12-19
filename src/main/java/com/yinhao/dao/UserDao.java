@@ -9,6 +9,8 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import static com.yinhao.constant.Constants.AUTHOR;
+
 /**
  * <p>文章数据访问层</p>
  * @author yinhao
@@ -47,7 +49,7 @@ public class UserDao {
         QueryRunner runner = new QueryRunner();
         try {
             String sql = "select * from user where username = ?";
-            return runner.query(conn, sql, new BeanHandler<>(User.class), "殷豪");
+            return runner.query(conn, sql, new BeanHandler<>(User.class), AUTHOR);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

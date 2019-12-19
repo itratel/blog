@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <welcome-file-list>
+        <!--为了服务启动时候直接条状到servlet/article，在欢迎页设置指定servlet-->
+        <welcome-file>servlet/article</welcome-file>
+    </welcome-file-list>
+
     <filter>
         <filter-name>AdminFilter</filter-name>
         <filter-class>com.yinhao.filter.AdminFilter</filter-class>
