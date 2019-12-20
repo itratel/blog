@@ -17,16 +17,19 @@
     <link rel="stylesheet" href="<%=context %>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=context %>/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=context %>/css/prism.css">
+    <link rel="stylesheet" href="<%=context %>/css/pagination.css">
     <script src="<%=context %>/js/jquery.min.js"></script>
     <script src="<%=context %>/js/blog.js"></script>
     <script src="<%=context %>/js/bootstrap.min.js"></script>
     <script src="<%=context %>/js/prism.js"></script>
+    <script src="<%=context %>/js/jquery.pagination.js"></script>
     <script type="application/javascript">
 
         /***
          * dom结构后加载评论
          **/
         $(function () {
+            //加载评论
             loadMsg();
         });
 
@@ -54,8 +57,10 @@
                 },
                 success: function (data) {
                     var content = data.dataList;
-                    if (content) {
+                    if (content && content.length) {
                         renderMsg(content);
+                    } else {
+                        $('#show-comments').html('<h5 style="color:#9d1e15">该文章还没有人评论喔，来抢一个沙发吧！</h5>')
                     }
                 },
                 error: function () {
@@ -72,8 +77,8 @@
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 html += '<div class="list-group-item">';
-                html += '<img src="../img/GitHub.png" style="float: left;padding-right: 10px;padding-top: 3px;">';
-                html += '<h4 class="list-group-item-heading" style="color: #3E7087">' + data[i].critics + '</h4>';
+                html += '<img src="../img/GitHub.png" style="float:left;padding-right:10px;padding-top:3px;">';
+                html += '<h4 class="list-group-item-heading" style="color:#3E7087">' + data[i].critics + '</h4>';
                 html += '<p class="list-group-item-text">' + data[i].content + '</p>';
                 html += '</div>';
             }
@@ -103,11 +108,9 @@
                 success: function (data) {
                     if(data === 'success'){
                         //清空评论区的内容
-                        $('#comment').html('');
-                        alert("评论成功");
+                        $('#comment').val('');
                         loadMsg();
                     }
-
                 },
                 error: function () {
                     alert("请求失败");
@@ -131,10 +134,11 @@
                                 殷豪发表于${fn:substring(article.date,0,10)}</div>
                             <div class="single-content">${article.htmlContent}</div>
                             <br>
-                            <form>
+                            <form id="postForm">
                                 <h4>所有评论：</h4>
                                 <div id="show-comments" class="list-group" style="border: #0a001f; ">
                                 </div>
+                                <br>
                                 <div class="form-group">
                                     <label for="comment">评论这篇文章:</label>
                                     <textarea class="form-control" rows="5" id="comment"
