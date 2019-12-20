@@ -13,16 +13,14 @@
           name="viewport">
     <link rel="shortcut icon" href="<%=context %>/img/favicon.ico"/>
     <link rel="stylesheet" href="<%=context %>/css/blog.css"/>
-    <link rel="stylesheet" href="<%=context %>/css/page.css">
     <link rel="stylesheet" href="<%=context %>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=context %>/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=context %>/css/prism.css">
-    <link rel="stylesheet" href="<%=context %>/css/pagination.css">
     <script src="<%=context %>/js/jquery.min.js"></script>
     <script src="<%=context %>/js/blog.js"></script>
     <script src="<%=context %>/js/bootstrap.min.js"></script>
     <script src="<%=context %>/js/prism.js"></script>
-    <script src="<%=context %>/js/jquery.pagination.js"></script>
+    <script src="<%=context %>/js/bootstrap-paginator.js"></script>
     <script type="application/javascript">
 
         /***
@@ -34,18 +32,22 @@
         });
 
         /***
+         * @param pageNum 页码
+         * @param pageSize 每页数据条数
          * 准备参数
          */
-        function loadMsg() {
+        function loadMsg(pageNum, pageSize) {
             var aId = $('#articleId').val() || ${article.id};
-            loadComments(aId);
+            loadComments(aId, pageNum, pageSize);
         }
 
         /***
-         * @param aId
+         * @param aId 文章id
+         * @param pageNum 页码
+         * @param pageSize 每页数据条数
          * 加载评论
          */
-        function loadComments(aId) {
+        function loadComments(aId, pageNum, pageSize) {
             $.ajax({
                 type: "POST",
                 async: true,
@@ -53,20 +55,64 @@
                 dataType: "json",
                 data: {
                     "action": "page",
-                    "aId": aId
+                    "aId": aId,
+                    "pageNum": pageNum,
+                    "pageSize": pageSize
                 },
                 success: function (data) {
                     var content = data.dataList;
                     if (content && content.length) {
                         renderMsg(content);
+                        loadPagination(data);
                     } else {
-                        $('#show-comments').html('<h5 style="color:#9d1e15">该文章还没有人评论喔，来抢一个沙发吧！</h5>')
+                        renderEmptyMsg();
                     }
                 },
                 error: function () {
                     alert("请求失败");
                 }
             });
+        }
+
+        /***
+         * 加载分页按钮
+         * @param data
+         */
+        function loadPagination(data) {
+            var options = {
+                bootstrapMajorVersion: 3,
+                currentPage: data.curPage, // 当前页数
+                numberOfPages: 5, // 显示按钮的数量
+                totalPages: data.totalPage, // 总页数
+                itemTexts: function (type, page, current) {
+                    switch (type) {
+                        case "first":
+                            return "首页";
+                        case "prev":
+                            return "上一页";
+                        case "next":
+                            return "下一页";
+                        case "last":
+                            return "末页";
+                        case "page":
+                            return page;
+                    }
+                },
+                // 点击事件，用于通过Ajax来刷新整个list列表
+                onPageClicked: function (event, originalEvent, type, page) {
+                    loadMsg(page, data.pageSize);
+                }
+            };
+            //填充分页按钮
+            $('#btn-page').bootstrapPaginator(options);
+        }
+
+        /***
+         * 渲染评论
+         */
+        function renderEmptyMsg() {
+            var html = '<h5 style="color:#9d1e15">该文章还没有人评论喔，来抢一个沙发吧！</h5>';
+            $('#show-comments').html(html);
         }
 
         /***
@@ -106,7 +152,7 @@
                     "content": content
                 },
                 success: function (data) {
-                    if(data === 'success'){
+                    if (data === 'success') {
                         //清空评论区的内容
                         $('#comment').val('');
                         loadMsg();
@@ -137,6 +183,11 @@
                             <form id="postForm">
                                 <h4>所有评论：</h4>
                                 <div id="show-comments" class="list-group" style="border: #0a001f; ">
+
+                                </div>
+                                <div class="col-lg-12" align="right">
+                                    <%--用于放置按钮--%>
+                                    <ul id="btn-page"></ul>
                                 </div>
                                 <br>
                                 <div class="form-group">

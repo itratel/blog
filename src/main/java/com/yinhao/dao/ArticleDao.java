@@ -72,7 +72,7 @@ public class ArticleDao {
                     .setCurPage(pageNum).setTotal(total)
                     .setTotalPage(totalPage).setDataList(list);
         } catch (SQLException e) {
-            throw new RuntimeException("查询所有数据异常！", e);
+            throw new RuntimeException("查询所有文章数据异常！", e);
         } finally {
             DbUtils.closeQuietly(conn);
         }
