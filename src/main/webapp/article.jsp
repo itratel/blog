@@ -27,10 +27,21 @@
          * dom结构后加载评论
          **/
         $(function () {
-            var aId = $('#articleId').val() || ${article.id};
-            loadComments(aId);
+            loadMsg();
         });
 
+        /***
+         * 准备参数
+         */
+        function loadMsg() {
+            var aId = $('#articleId').val() || ${article.id};
+            loadComments(aId);
+        }
+
+        /***
+         * @param aId
+         * 加载评论
+         */
         function loadComments(aId) {
             $.ajax({
                 type: "POST",
@@ -43,7 +54,6 @@
                 },
                 success: function (data) {
                     var content = data.dataList;
-                    console.log(content);
                     if (content) {
                         renderMsg(content);
                     }
@@ -54,13 +64,19 @@
             });
         }
 
+        /***
+         * @param data
+         * 渲染评论
+         */
         function renderMsg(data) {
             var html = '';
-            html +='<ul>';
             for (var i = 0; i < data.length; i++) {
-                html +='<li>'+data[i].content+'</li>';
+                html += '<div class="list-group-item">';
+                html += '<img src="../img/GitHub.png" style="float: left;padding-right: 10px;padding-top: 3px;">';
+                html += '<h4 class="list-group-item-heading" style="color: #3E7087">' + data[i].critics + '</h4>';
+                html += '<p class="list-group-item-text">' + data[i].content + '</p>';
+                html += '</div>';
             }
-            html +='</ul>';
             $('#show-comments').html(html);
         }
 
@@ -70,6 +86,10 @@
         function addMsg() {
             var aId = $('#articleId').val();
             var content = $('#comment').val();
+            if (!content) {
+                alert('评论内容不能为空!');
+                return;
+            }
             $.ajax({
                 type: "POST",
                 async: true,
@@ -81,8 +101,13 @@
                     "content": content
                 },
                 success: function (data) {
-                    alert(data);
-                    window.location.reload();
+                    if(data === 'success'){
+                        //清空评论区的内容
+                        $('#comment').html('');
+                        alert("评论成功");
+                        loadMsg();
+                    }
+
                 },
                 error: function () {
                     alert("请求失败");
@@ -107,13 +132,15 @@
                             <div class="single-content">${article.htmlContent}</div>
                             <br>
                             <form>
-                                <div id="show-comments" class="form-group" style="border: #0a001f">
-
+                                <h4>所有评论：</h4>
+                                <div id="show-comments" class="list-group" style="border: #0a001f; ">
                                 </div>
                                 <div class="form-group">
                                     <label for="comment">评论这篇文章:</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                                    <input id="addComment" type="button" class="btn btn-sm btn-primary" style="float: right;" value="提交" onclick="addMsg()"/>
+                                    <textarea class="form-control" rows="5" id="comment"
+                                              placeholder="请留下你的足迹..."></textarea>
+                                    <input id="addComment" type="button" class="btn btn-sm btn-primary"
+                                           style="float: right;" value="提交" onclick="addMsg()"/>
                                 </div>
                             </form>
                         </div>

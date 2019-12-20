@@ -1,7 +1,6 @@
 package com.yinhao.dao;
 
 import com.yinhao.model.Message;
-import com.yinhao.model.Message;
 import com.yinhao.model.PageInfo;
 import com.yinhao.util.JdbcUtil;
 import org.apache.commons.dbutils.DbUtils;
@@ -46,13 +45,13 @@ public class MessageDao {
             long total = runner.query(conn, countSql, new ScalarHandler<>(), articleId);
             // 获取查询的评论记录
             list = runner.query(conn, sql.toString(), new BeanListHandler<>(Message.class), articleId);
+            long div = total / pageSize;
             //获取总页数
-            long totalPage = total / pageSize;
-            if (total % pageSize != 0) {
-                totalPage++;
-            }
+            long totalPage = total % pageSize == 0 ? div : div + 1;
             // 组装pager对象
-            pageInfo = new PageInfo<>(pageSize, pageNum, total, totalPage, list);
+            pageInfo = new PageInfo<Message>().setPageSize(pageSize)
+                    .setCurPage(pageNum).setTotal(total)
+                    .setTotalPage(totalPage).setDataList(list);
         } catch (SQLException e) {
             throw new RuntimeException("查询所评论数据异常！", e);
         } finally {

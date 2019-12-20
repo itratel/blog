@@ -64,13 +64,13 @@ public class ArticleDao {
             long total = runner.query(conn, countSql, new ScalarHandler<>());
             // 获取查询的文章记录
             list = runner.query(conn, sql.toString(), new BeanListHandler<>(Article.class));
+            long div = total / pageSize;
             //获取总页数
-            long totalPage = total / pageSize;
-            if (total % pageSize != 0) {
-                totalPage++;
-            }
+            long totalPage = total % pageSize == 0 ? div : div + 1;
             // 组装pager对象
-            pageInfo = new PageInfo<>(pageSize, pageNum, total, totalPage, list);
+            pageInfo = new PageInfo<Article>().setPageSize(pageSize)
+                    .setCurPage(pageNum).setTotal(total)
+                    .setTotalPage(totalPage).setDataList(list);
         } catch (SQLException e) {
             throw new RuntimeException("查询所有数据异常！", e);
         } finally {

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 import static com.yinhao.constant.Constants.*;
 
@@ -70,7 +69,6 @@ public class MessageServlet extends HttpServlet {
      * 删除评论
      * @param request request
      * @param response response
-     * @throws ServletException
      * @throws IOException
      */
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {

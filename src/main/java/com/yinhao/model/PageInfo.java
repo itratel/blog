@@ -30,54 +30,48 @@ public class PageInfo<T> {
      */
     private List<T> dataList;
 
-    public PageInfo() {
-    }
-
-    public PageInfo(int pageSize, int curPage, long total, long totalPage, List<T> dataList) {
-        this.pageSize = pageSize;
-        this.curPage = curPage;
-        this.total = total;
-        this.totalPage = totalPage;
-        this.dataList = dataList;
-    }
-
     public int getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public PageInfo<T> setPageSize(int pageSize) {
         this.pageSize = pageSize;
+        return this;
     }
 
     public int getCurPage() {
         return curPage;
     }
 
-    public void setCurPage(int curPage) {
+    public PageInfo<T> setCurPage(int curPage) {
         this.curPage = curPage;
+        return this;
     }
 
     public long getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
+    public PageInfo<T> setTotal(long total) {
         this.total = total;
+        return this;
     }
 
     public long getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(long totalPage) {
+    public PageInfo<T> setTotalPage(long totalPage) {
         this.totalPage = totalPage;
+        return this;
     }
 
     public List<T> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<T> dataList) {
+    public PageInfo<T> setDataList(List<T> dataList) {
         this.dataList = dataList;
+        return this;
     }
 }
