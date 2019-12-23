@@ -1,5 +1,9 @@
 # blog
 
+### 博客说明
+
+jsp + servlet + bootstrap + markdown + mysql 实现的简易博客, 欢迎使用。
+
 ### 项目启动步骤
 
 - 1.运行sql文件，创建名为blog的数据库，打入初始数据;
