@@ -39,24 +39,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div id="left-nav" class="col-md-2">
-            <div class="author-nav">
-                <img src="../img/avatar.jpg" alt="个人头像">
-            </div>
-            <div class="main-nav">
-                <ul>
-                    <a href="<%=context %>/servlet/article?action=page">
-                        <li>所有文章</li>
-                    </a>
-                    <a href="#">
-                        <li class="current">写文章</li>
-                    </a>
-                    <a href="<%=context %>/servlet/article?action=top3">
-                        <li>返回首页</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../admin-navigation.jsp"/>
         <form class="form-inline" action="<%=context %>/servlet/article?action=add" method="post"
               onSubmit="return beforeSubmit(this);">
             <div id="edit" class="col-md-8 col-xs-12">

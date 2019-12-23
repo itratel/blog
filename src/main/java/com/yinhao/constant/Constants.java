@@ -15,6 +15,7 @@ public class Constants {
     public static final String UPDATE = "update";
     public static final String GET_ONE = "getOne";
     public static final String GET_PAGE = "page";
+    public static final String ADMIN_PAGE = "admin_page";
     public static final String TOP_THREE = "top3";
     public static final String AUTHOR = "yinhao";
 
@@ -33,7 +34,7 @@ public class Constants {
     public static final String TYPE = "type";
     public static final String RESULT = "result";
     public static final String CUSTOM = "custom";
-    public static final String GUEST = "guest";
+    public static final String ARTICLE_DETAIL = "article_detail";
     public static final String GUEST_ZH = "游客";
     public static final String USER = "user";
     public static final String ARTICLE_ID = "aId";

@@ -21,9 +21,6 @@
             <a href="<%=context %>/servlet/user">
                 <li>个人档案</li>
             </a>
-            <a href="<%=context %>/message.jsp">
-                <li>留言</li>
-            </a>
             <a href="<%=context %>/servlet/article?action=page">
                 <li>后台登陆</li>
             </a>

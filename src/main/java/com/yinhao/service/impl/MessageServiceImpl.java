@@ -2,6 +2,7 @@ package com.yinhao.service.impl;
 
 import com.yinhao.dao.MessageDao;
 import com.yinhao.model.Message;
+import com.yinhao.model.MessageVo;
 import com.yinhao.model.PageInfo;
 import com.yinhao.service.IMessageService;
 
@@ -28,6 +29,17 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     public PageInfo<Message> listMessage(int articleId, int pageNum, int pageSize) {
         return messageDao.listMessage(articleId, pageNum, pageSize);
+    }
+
+    /***
+     * 分页查询所有评论
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @return PageInfo<Message>
+     */
+    @Override
+    public PageInfo<MessageVo> listAllMessage(int pageNum, int pageSize) {
+        return messageDao.listAllMessage(pageNum, pageSize);
     }
 
     /***

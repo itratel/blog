@@ -60,7 +60,7 @@
                                     <article class="index-article">
                                         <div class="post-info">
                                             <h2>
-                                                <a href="<%=context %>/servlet/article?action=getOne&type=guest&id=${article.id}">${status.index + 1}.${article.title }</a>
+                                                <a href="<%=context %>/servlet/article?action=getOne&type=article_detail&id=${article.id}">${status.index + 1}.${article.title }</a>
                                             </h2>
                                             <div class="post-detial">
                                                 <span>${article.title}</span>

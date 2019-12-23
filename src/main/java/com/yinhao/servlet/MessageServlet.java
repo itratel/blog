@@ -2,6 +2,7 @@ package com.yinhao.servlet;
 
 import com.google.gson.Gson;
 import com.yinhao.model.Message;
+import com.yinhao.model.MessageVo;
 import com.yinhao.model.PageInfo;
 import com.yinhao.service.IMessageService;
 import com.yinhao.service.impl.MessageServiceImpl;
@@ -40,6 +41,9 @@ public class MessageServlet extends HttpServlet {
             case ADD:
                 add(request, response);
                 break;
+            case ADMIN_PAGE:
+                adminPage(request, response);
+                break;
             default:
                 break;
         }
@@ -47,6 +51,25 @@ public class MessageServlet extends HttpServlet {
 
     /***
      * 分页查询评论信息
+     * @param request request
+     * @param response response
+     */
+    private void adminPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String strPageNum = request.getParameter(PAGE_NUM);
+        String strPageSize = request.getParameter(PAGE_SIZE);
+        //默认值
+        int pageNum = StrUtil.isEmpty(strPageNum) ? MIN_PAGE_SIZE : Integer.parseInt(strPageNum);
+        int pageSize = StrUtil.isEmpty(strPageSize) ? MAX_PAGE_SIZE : Integer.parseInt(strPageSize);
+        IMessageService messageService = new MessageServiceImpl();
+        //调用service 获取查询结果
+        PageInfo<MessageVo> result = messageService.listAllMessage(pageNum, pageSize);
+        // 返回结果到页面
+        request.setAttribute(RESULT, result);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/message.jsp").forward(request, response);
+    }
+
+    /***
+     * Ajax分页查询评论信息
      * @param request request
      * @param response response
      */

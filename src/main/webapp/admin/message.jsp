@@ -23,18 +23,20 @@
     <script>
 
         function deletePost(id) {
-            if (confirm("你确定删除文章？")) {
+            if (confirm("你确定删除该评论？")) {
                 $.ajax({
                     type: "POST",
                     async: true,
                     dataType: "text",
-                    url: "<%=context %>/servlet/article",
+                    url: "<%=context %>/servlet/message",
                     data: {
                         "action": "delete",
                         "id": id
                     },
                     success: function (data) {
-                        alert(data);
+                        if (data === 'success'){
+                            alert("删除成功！");
+                        }
                         window.location.reload();
                     },
                     error: function () {
@@ -53,7 +55,7 @@
                 prev_text: "上一页",
                 num_edge_entries: 2, // 连接分页主体，显示的条目数
                 callback: function (new_page_index) {
-                    $("#postForm").attr("action", "<%=context %>/servlet/article?action=page&pageNum=" + (new_page_index + 1));
+                    $("#postForm").attr("action", "<%=context %>/servlet/message?action=admin_page&pageNum=" + (new_page_index + 1));
                     $("#postForm").submit();
                     return false;
                 }
@@ -90,23 +92,23 @@
                         <thead>
                         <tr>
                             <th>序号</th>
-                            <th>标题</th>
-                            <th>发表日期</th>
+                            <th>文章标题</th>
+                            <th>评论内容</th>
+                            <th>评论人</th>
+                            <th>评论时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${result.dataList }" var="article" varStatus="loop">
+                        <c:forEach items="${result.dataList }" var="message" varStatus="loop">
                         <tr>
                             <td><c:out value="${result.pageSize * (result.curPage - 1) + loop.count}"/></td>
-                            <td><a href="<%=context %>/servlet/article?action=getOne&type=article_detail&id=${article.id}">${article.title }</a></td>
-                            <td><c:out value="${fn:substring(article.date,0,19)}"/></td>
+                            <td><c:out value="${message.title }"/></td>
+                            <td><c:out value="${message.content }"/></td>
+                            <td><c:out value="${message.critics }"/></td>
+                            <td><c:out value="${fn:substring(message.date,0,19)}"/></td>
                             <td>
-                                <a href="<%=context %>/servlet/article?action=getOne&id=${article.id }">
-                                    <button type="button" class="btn btn-primary">修改</button>
-                                </a>
-                                <button type="button" class="btn btn-danger" onclick="deletePost(${article.id })">删除
-                                </button>
+                                <button type="button" class="btn btn-danger" onclick="deletePost(${message.id })">删除</button>
                             </td>
                         </tr>
                         </c:forEach>

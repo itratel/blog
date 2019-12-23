@@ -1,6 +1,7 @@
 package com.yinhao.service;
 
 import com.yinhao.model.Message;
+import com.yinhao.model.MessageVo;
 import com.yinhao.model.PageInfo;
 
 import java.util.List;
@@ -14,13 +15,22 @@ public interface IMessageService {
 
 
     /***
-     * 分页查询评论
+     * 根据文章id分页查询评论
      * @param articleId 文章id
      * @param pageNum 页码
      * @param pageSize 每页大小
      * @return PageInfo<Message>
      */
     PageInfo<Message> listMessage(int articleId, int pageNum, int pageSize);
+
+
+    /***
+     * 分页查询所有评论
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @return PageInfo<MessageVo>
+     */
+    PageInfo<MessageVo> listAllMessage(int pageNum, int pageSize);
 
     /***
      * 插入评论

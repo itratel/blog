@@ -107,7 +107,7 @@ public class ArticleServlet extends HttpServlet {
         String contextPath = request.getContextPath();
         request.setAttribute("article", article);
         String type = request.getParameter(TYPE);
-        if (StrUtil.isNotEmpty(type) && GUEST.equals(type)){
+        if (StrUtil.isNotEmpty(type) && ARTICLE_DETAIL.equals(type)){
             request.getRequestDispatcher(contextPath + "/article.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher(contextPath + "/admin/edit.jsp").forward(request, response);
