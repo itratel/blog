@@ -68,9 +68,6 @@
                         <div class="jumbotron">
                             <h1>欢迎访问殷豪的个人博客</h1>
                             <p>这是一个博主本人自己的一些平时学习经验和大家交流的地方，欢迎大家参与评论！</p>
-<%--                            <p><a class="btn btn-primary btn-lg" role="button">--%>
-<%--                                学习更多</a>--%>
-<%--                            </p>--%>
                         </div>
                         <div class="row">
                             <div class="article-wrap col-md-10 col-md-offset-1 col-xs-12">
@@ -78,7 +75,7 @@
                                     <article class="index-article">
                                         <div class="post-info">
                                             <h2>
-                                                <a href="<%=context %>/servlet/article?action=getOne&type=guest&id=${article.id}">${result.pageSize * (result.curPage - 1) + loop.count}.${article.title }</a>
+                                                <a href="<%=context %>/servlet/article?action=getOne&type=article_detail&id=${article.id}">${result.pageSize * (result.curPage - 1) + loop.count}.${article.title }</a>
                                             </h2>
                                             <div class="post-detial">
                                                 <span>${article.title}</span>
