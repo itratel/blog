@@ -139,6 +139,7 @@
             var content = $('#comment').val();
             if (!content) {
                 alert('评论内容不能为空!');
+                $('#comment').focus();
                 return;
             }
             $.ajax({
