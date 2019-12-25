@@ -31,7 +31,7 @@
             </form>
             <script>
                 function reloadCode() {
-                    $("#img").src = "/servlet/img?" + Math.random();
+                    $("#img").attr('src', '<%=context%>/servlet/img?' + Math.random());
                 }
             </script>
         </div>
